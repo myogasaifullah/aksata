@@ -60,6 +60,15 @@
                 <span class="nav-link-text ms-1">QR</span>
             </a>
         </li>
+        <li class="nav-item">
+    <a class="nav-link text-white d-flex align-items-center" href="{{ route('admin.rate.index') }}">
+        <div class="me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">star_rate</i>
+        </div>
+        <span class="nav-link-text">Rate</span>
+    </a>
+
+
 
            
             <li class="nav-item">

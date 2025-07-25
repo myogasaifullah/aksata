@@ -10,13 +10,15 @@ use App\Http\Controllers\Auth\AdminOrderController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AdminGameController;
 use App\Http\Controllers\AdminHargaController;
+use App\Http\Controllers\Auth\AdminRateController;
+use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
 
 // Halaman login
 Route::get('/', function () {
     return view('auth/login');
 });
 
-// Logout route
+// Logout
 Route::post('logout', function () {
     Auth::logout();
     return redirect('/');
@@ -67,11 +69,18 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/pembayaran/{id}', [PaymentsController::class, 'update'])->name('admin.pembayaran.update');
     Route::delete('/pembayaran/{id}', [PaymentsController::class, 'destroy'])->name('admin.pembayaran.destroy');
 
-    // Order (CRUD)
+    // Order
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
     Route::post('/orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');
     Route::put('/orders/{id}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
     Route::delete('/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
+
+    // ⭐ Rate (bintang, nama, deskripsi) via AdminRateController
+    Route::get('/rate', [AdminRateController::class, 'index'])->name('admin.rate.index');
+    Route::post('/rate', [AdminRateController::class, 'store'])->name('admin.rate.store');
+    Route::put('/rate/{id}', [AdminRateController::class, 'update'])->name('admin.rate.update');
+    Route::delete('/rate/{id}', [AdminRateController::class, 'destroy'])->name('admin.rate.destroy');
+
 });
 
 require __DIR__.'/auth.php';

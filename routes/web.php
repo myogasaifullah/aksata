@@ -12,7 +12,7 @@ Route::post('logout', function () {
 })->name('logout');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::middleware(['auth'])->group(function () {

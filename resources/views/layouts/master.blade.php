@@ -35,6 +35,8 @@
             @yield('content') <!-- Content will be injected here -->
             
         </div>
+
+        
         
         @include('layouts.footer')
     </main>

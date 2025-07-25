@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/harga', [\App\Http\Controllers\AdminHargaController::class, 'index'])->name('admin.harga.index');
     Route::post('/harga', [\App\Http\Controllers\AdminHargaController::class, 'store'])->name('admin.harga.store');
     Route::put('/harga/{harga}', [\App\Http\Controllers\AdminHargaController::class, 'update'])->name('admin.harga.update');
+    Route::delete('/harga/{harga}', [\App\Http\Controllers\AdminHargaController::class, 'destroy'])->name('admin.harga.destroy');
 });
 
 

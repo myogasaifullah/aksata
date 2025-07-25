@@ -13,11 +13,18 @@ class AdminHargaController extends Controller
     {
         // Fetch harga data with related game data
         $hargas = Harga::with('game')->get();
+
+        // Group harga by game name
+        $hargasGrouped = $hargas->groupBy(function ($harga) {
+            return $harga->game->nama; // Kelompokkan berdasarkan nama game
+        });
+
         $games = Game::all();
 
-        // Return the harga view with the data
-        return view('admin.harga', compact('hargas', 'games'));
+        // Return the harga view with the grouped data
+        return view('admin.harga', compact('hargasGrouped', 'games'));
     }
+
 
     public function store(Request $request)
     {
@@ -51,5 +58,11 @@ class AdminHargaController extends Controller
         ]);
 
         return redirect()->route('admin.harga.index')->with('success', 'Harga berhasil diperbarui.');
+    }
+
+    public function destroy(Harga $harga)
+    {
+        $harga->delete();
+        return redirect()->route('admin.harga.index')->with('success', 'Harga berhasil dihapus.');
     }
 }

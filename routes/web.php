@@ -17,7 +17,7 @@ Route::post('logout', function () {
 
 // ✅ Login Page
 Route::get('/', function () {
-    return view('auth/login');
+    return view('welcome');
 });
 
 Route::get('/order', function () {

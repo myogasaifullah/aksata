@@ -22,6 +22,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pembayaran/{id}/edit', [\App\Http\Controllers\PaymentsController::class, 'edit'])->name('admin.pembayaran.edit');
     Route::put('/pembayaran/{id}', [\App\Http\Controllers\PaymentsController::class, 'update'])->name('admin.pembayaran.update');
     Route::delete('/pembayaran/{id}', [\App\Http\Controllers\PaymentsController::class, 'destroy'])->name('admin.pembayaran.destroy');
+
+    Route::get('/games', [\App\Http\Controllers\AdminGameController::class, 'index'])->name('admin.games.index');
+    Route::post('/games', [\App\Http\Controllers\AdminGameController::class, 'store'])->name('admin.games.store');
+    Route::get('/games/{game}/edit', [\App\Http\Controllers\AdminGameController::class, 'edit'])->name('admin.games.edit');
+    Route::put('/games/{game}', [\App\Http\Controllers\AdminGameController::class, 'update'])->name('admin.games.update');
+    Route::delete('/games/{game}', [\App\Http\Controllers\AdminGameController::class, 'destroy'])->name('admin.games.destroy');
+
+
 });
 
 

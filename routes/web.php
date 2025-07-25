@@ -1,23 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AdminQrController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\PaymentsController;
-use App\Http\Controllers\AdminGameController;
-use App\Http\Controllers\AdminHargaController;
-use App\Http\Controllers\Auth\AdminQrController;
+use Illuminate\Support\Facades\Route;
+// routes/web.php
+use Illuminate\Support\Facades\Auth;
 
-// ✅ Logout
 Route::post('logout', function () {
     Auth::logout();
-    return redirect('/');
+    return redirect('/'); // Redirect after logout
 })->name('logout');
 
-// ✅ Login Page
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('/order', function () {
@@ -43,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/harga/{harga}', [\App\Http\Controllers\AdminHargaController::class, 'update'])->name('admin.harga.update');
     Route::delete('/harga/{harga}', [\App\Http\Controllers\AdminHargaController::class, 'destroy'])->name('admin.harga.destroy');
 
-     // 🔸 ✅ QR Upload (tambahan dari ChatGPT)
     Route::get('/qr', [AdminQrController::class, 'index'])->name('admin.qr.index');
     Route::post('/qr', [AdminQrController::class, 'store'])->name('admin.qr.store');
     Route::put('/qr/{qr}', [AdminQrController::class, 'update'])->name('admin.qr.update');
@@ -58,3 +53,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 });
 
+Route::get('/dashboard', function () {
+    return view('admin/dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';

@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/order', function () {
+    return view('admin/order');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/pembayaran', [\App\Http\Controllers\PaymentsController::class, 'index'])->name('admin.pembayaran.index');
 

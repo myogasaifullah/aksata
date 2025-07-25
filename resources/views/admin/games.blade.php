@@ -143,6 +143,7 @@
     </div>
   </div>
 
+
   <!-- Delete Confirmation Modal -->
   <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -152,7 +153,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Yakin ingin menghapus game ini?
+          Yakin ingin menghapus game inii?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

@@ -17,6 +17,7 @@ class CreateGamesTable extends Migration
             $table->id();
             $table->string('gambar');
             $table->string('nama');
+            $table->text('deskripsi'); // ← Tambahan kolom deskripsi
             $table->timestamps();
         });
     }

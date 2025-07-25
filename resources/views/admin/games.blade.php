@@ -10,43 +10,16 @@
       </ol>
       <h6 class="font-weight-bolder mb-0">Games</h6>
     </nav>
-    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-      <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-        <div class="input-group input-group-outline">
-          <label class="form-label">Type here...</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <ul class="navbar-nav  justify-content-end">
-        <li class="nav-item d-flex align-items-center">
-          <!-- Authentication links can be added here -->
-        </li>
-
-        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-            <div class="sidenav-toggler-inner">
-              <i class="sidenav-toggler-line"></i>
-              <i class="sidenav-toggler-line"></i>
-              <i class="sidenav-toggler-line"></i>
-            </div>
-          </a>
-        </li>
-        <li class="nav-item px-3 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0">
-            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
   </div>
 </nav>
+
 <div class="container-fluid py-4">
   <div class="row">
     <div class="col-12">
       <div class="card my-4">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
           <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Games table</h6>
+            <h6 class="text-white text-capitalize ps-3">Games Table</h6>
           </div>
         </div>
         <div class="card-body px-0 pb-2">
@@ -61,6 +34,7 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deskripsi</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                 </tr>
@@ -73,9 +47,8 @@
                       <img src="{{ $game->gambar }}" alt="{{ $game->nama }}" width="50" class="border-radius-lg shadow">
                     </div>
                   </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{ $game->nama }}</p>
-                  </td>
+                  <td><p class="text-xs font-weight-bold mb-0">{{ $game->nama }}</p></td>
+                  <td><p class="text-xs mb-0">{{ Str::limit($game->deskripsi, 50) }}</p></td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{ $game->created_at->format('d/m/Y') }}</span>
                   </td>
@@ -84,6 +57,7 @@
                       data-bs-toggle="modal" data-bs-target="#editGameModal"
                       data-id="{{ $game->id }}"
                       data-nama="{{ $game->nama }}"
+                      data-deskripsi="{{ $game->deskripsi }}"
                       data-gambar="{{ $game->gambar }}">
                       <i class="material-icons text-sm me-2">edit</i>Edit
                     </button>
@@ -114,12 +88,16 @@
           </div>
           <div class="modal-body">
             <div class="input-group input-group-outline mb-3">
-              <label class="form-label" for="addGameName">Nama Game</label>
-              <input type="text" class="form-control" id="addGameName" name="nama" required autofocus>
+              <label class="form-label" for="addGameName"></label>
+              <input type="text" class="form-control" id="addGameName" name="nama" placeholder="Nama" required autofocus>
             </div>
             <div class="input-group input-group-outline mb-3">
-              <label class="form-label" for="addGameImage">Gambar</label>
+              <label class="form-label" for="addGameImage"></label>
               <input type="file" class="form-control" id="addGameImage" name="gambar" required>
+            </div>
+            <div class="input-group input-group-outline mb-3">
+              <label class="form-label" for="addGameDesc"></label>
+              <textarea class="form-control" id="addGameDesc" name="deskripsi" rows="3" placeholder="Tulis deskripsi game..."></textarea>
             </div>
           </div>
           <div class="modal-footer">
@@ -144,12 +122,16 @@
           </div>
           <div class="modal-body">
             <div class="input-group input-group-outline mb-3">
-              <label class="form-label" for="editGameName">Nama Game</label>
-              <input type="text" class="form-control" id="editGameName" name="nama" required autofocus>
+              <label class="form-label" for="editGameName"></label>
+              <input type="text" class="form-control" id="editGameName" name="nama" placeholder="nama" required autofocus>
             </div>
             <div class="input-group input-group-outline mb-3">
-              <label class="form-label" for="editGameImage">Gambar (optional)</label>
-              <input type="file" class="form-control" id="editGameImage" name="gambar">
+              <label class="form-label" for="editGameImage"></label>
+              <input type="file" class="form-control" id="editGameImage" placeholder="gambar" name="gambar">
+            </div>
+            <div class="input-group input-group-outline mb-3">
+              <label class="form-label" for="editGameDesc"></label>
+              <textarea class="form-control" id="editGameDesc" name="deskripsi" placeholder="deskripsi" rows="3"></textarea>
             </div>
           </div>
           <div class="modal-footer">
@@ -161,20 +143,21 @@
     </div>
   </div>
 
+
   <!-- Delete Confirmation Modal -->
   <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteGameModalLabel">Confirm Delete</h5>
+          <h5 class="modal-title" id="deleteGameModalLabel">Konfirmasi Hapus</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete this game?
+          Yakin ingin menghapus game inii?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteGameBtn">Delete</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteGameBtn">Hapus</button>
         </div>
       </div>
     </div>
@@ -182,34 +165,32 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const editGameModal = document.getElementById('editGameModal');
+  document.addEventListener('DOMContentLoaded', function () {
     const editGameForm = document.getElementById('editGameForm');
     const deleteGameModal = new bootstrap.Modal(document.getElementById('deleteGameModal'));
     let gameIdToDelete = null;
 
     document.querySelectorAll('.edit-game-btn').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function () {
         const gameId = this.getAttribute('data-id');
         const gameName = this.getAttribute('data-nama');
-        // const gameImage = this.getAttribute('data-gambar'); // Not used for now
+        const gameDeskripsi = this.getAttribute('data-deskripsi');
 
         editGameForm.action = `/games/${gameId}`;
         editGameForm.querySelector('#editGameName').value = gameName;
         editGameForm.querySelector('#editGameImage').value = '';
+        editGameForm.querySelector('#editGameDesc').value = gameDeskripsi || '';
       });
     });
 
-    // Delete game button handler
     document.querySelectorAll('.delete-game-btn').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function () {
         gameIdToDelete = this.getAttribute('data-id');
         deleteGameModal.show();
       });
     });
 
-    // Confirm delete button in modal
-    document.getElementById('confirmDeleteGameBtn').addEventListener('click', async function() {
+    document.getElementById('confirmDeleteGameBtn').addEventListener('click', async function () {
       if (!gameIdToDelete) return;
       try {
         const response = await fetch(`/games/${gameIdToDelete}`, {
@@ -224,12 +205,11 @@
           window.location.reload();
         }
       } catch (error) {
-        // silently fail or optionally log error
+        // Optional: handle error
       }
       deleteGameModal.hide();
       gameIdToDelete = null;
     });
   });
 </script>
-
 @endsection

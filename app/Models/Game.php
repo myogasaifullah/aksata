@@ -9,7 +9,8 @@ class Game extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['gambar', 'nama'];
+    // Tambahkan 'deskripsi' ke fillable agar bisa diisi saat create/update
+    protected $fillable = ['gambar', 'nama', 'deskripsi'];
 
     public function hargas()
     {

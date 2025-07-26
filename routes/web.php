@@ -23,7 +23,7 @@ Route::get('/', function () {
     $rates = Rate::all();
     return view('pages.beranda', compact('games', 'rates'));
 })->name('beranda');
-
+    
 Route::post('/public-rate', [PublicRateController::class, 'store'])->name('public.rate.store');
 
 Route::get('/syarat-ketentuan', function () {

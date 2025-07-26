@@ -13,10 +13,41 @@ use App\Http\Controllers\AdminHargaController;
 use App\Http\Controllers\Auth\AdminRateController;
 use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
 
-// Halaman login
+use App\Models\Game;
+
+use App\Models\Rate;
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    $games = Game::all();
+    $rates = Rate::all();
+    return view('pages.beranda', compact('games', 'rates'));
+})->name('beranda');
+
+Route::get('/syarat-ketentuan', function () {
+    return view('pages.syarat-ketentuan');
+})->name('syarat-ketentuan');
+
+Route::get('/riwayat-pembelian', function () {
+    return view('pages.riwayat-pembelian');
+})->name('riwayat-pembelian');
+
+
+Route::get('/register', fn() => 'Halaman Daftar')->name('register');
+use App\Models\Payment;
+
+use App\Models\Qr;
+
+Route::get('/show', function () {
+    $payments = Payment::all();
+    $qrs = Qr::all();
+    return view('pages.game-detail', compact('payments', 'qrs'));
+})->name('show');
+
+Route::get('/konfirmasi-pembayaran', function () {
+    $qrs = Qr::all();
+    return view('pages.konfirmasi-pembayaran', compact('qrs'));
+})->name('konfirmasi-pembayaran');
+
 
 // Halaman login
 Route::get('/login', function () {
@@ -85,7 +116,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/rate', [AdminRateController::class, 'store'])->name('admin.rate.store');
     Route::put('/rate/{id}', [AdminRateController::class, 'update'])->name('admin.rate.update');
     Route::delete('/rate/{id}', [AdminRateController::class, 'destroy'])->name('admin.rate.destroy');
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

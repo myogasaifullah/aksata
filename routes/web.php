@@ -15,6 +15,11 @@ use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
 
 // Halaman login
 Route::get('/', function () {
+    return view('welcome');
+});
+
+// Halaman login
+Route::get('/login', function () {
     return view('auth/login');
 });
 

@@ -234,7 +234,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
           </div>
           <div class="modal-body">
-            <input type="text" name="id_transaksi" placeholder="ID Transaksi" class="form-control mb-2" required>
             <input type="text" name="no_telp" placeholder="No Telepon" class="form-control mb-2" required>
             <input type="text" name="produk" placeholder="Produk" class="form-control mb-2" required>
             <input type="date" name="tanggal" class="form-control mb-2" required>

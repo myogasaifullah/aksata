@@ -137,7 +137,7 @@
     <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm max-w-3xl mx-auto">
         <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Bagikan Pengalaman Anda</h3>
         
-        <form  method="POST" class="space-y-4">
+        <form method="POST" action="{{ route('public.rate.store') }}" class="space-y-4">
             @csrf
             
             <!-- Name Input -->
@@ -150,10 +150,13 @@
 
             <!-- Kode Transaksi Input -->
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Kode Transaksi</label>
-                <input type="text" id="name" name="name" required
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                       placeholder="Masukkan Kode Transaksi Anda">
+                <label for="transaction_id" class="block text-sm font-medium text-gray-700 mb-1">Kode Transaksi</label>
+            <input type="text" id="transaction_id" name="transaction_id" required
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all @error('transaction_id') border-red-500 @enderror"
+                   placeholder="Masukkan Kode Transaksi Anda" value="{{ old('transaction_id') }}">
+            @error('transaction_id')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
             </div>
             
             <!-- Rating Input -->

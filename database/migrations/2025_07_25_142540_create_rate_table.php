@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('rates', function (Blueprint $table) {
-            $table->id();
-            $table->integer('stars');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->timestamps();
-        });
+Schema::create('rates', function (Blueprint $table) {
+    $table->id();
+    $table->integer('stars');
+    $table->string('name');
+    $table->string('transaction_id');  // Added transaction_id column
+    $table->text('description')->nullable();
+    $table->timestamps();
+});
     }
 
     public function down(): void

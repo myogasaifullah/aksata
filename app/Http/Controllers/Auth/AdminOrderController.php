@@ -13,9 +13,13 @@ class AdminOrderController extends Controller
         return view('admin.order', compact('orders'));
     }
 
+    public function history() {
+        $orders = Order::all();
+        return view('pages.riwayat-pembelian', compact('orders'));
+    }
+
     public function store(Request $request) {
         $request->validate([
-            'id_transaksi' => 'required|unique:orders',
             'no_telp' => 'required',
             'produk' => 'required',
             'tanggal' => 'required|date',
@@ -24,7 +28,10 @@ class AdminOrderController extends Controller
             'status' => 'required',
         ]);
 
-        Order::create($request->all());
+        $data = $request->all();
+        $data['id_transaksi'] = uniqid('TRX-');
+
+        Order::create($data);
         return redirect()->back()->with('success', 'Order berhasil ditambahkan.');
     }
 

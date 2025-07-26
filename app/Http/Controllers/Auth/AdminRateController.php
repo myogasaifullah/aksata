@@ -19,6 +19,7 @@ class AdminRateController extends Controller
         $request->validate([
             'stars' => 'required|integer|min:1|max:5',
             'name' => 'required|string|max:255',
+            'transaction_id' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 

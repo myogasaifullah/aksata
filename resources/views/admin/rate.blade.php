@@ -156,6 +156,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bintang</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deskripsi</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ID Transaksi</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                 </tr>
               </thead>
@@ -165,6 +166,7 @@
                   <td>{!! str_repeat('⭐', $rate->stars) !!}</td>
                   <td>{{ $rate->name }}</td>
                   <td>{{ $rate->description }}</td>
+                  <td>{{ $rate->transaction_id }}</td>
                   <td class="text-center">
                     <!-- Edit Button -->
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $rate->id }}">
@@ -201,6 +203,10 @@
                           <div class="mb-3">
                             <label>Deskripsi</label>
                             <textarea name="description" class="form-control">{{ $rate->description }}</textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label>ID Transaksi</label>
+                            <input type="text" name="transaction_id" class="form-control" value="{{ $rate->transaction_id ?? '' }}" required>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -241,6 +247,10 @@
           <div class="mb-3">
             <label>Deskripsi</label>
             <textarea name="description" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label>ID Transaksi</label>
+            <input type="text" name="transaction_id" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">

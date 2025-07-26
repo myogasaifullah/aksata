@@ -55,97 +55,59 @@
         </div>
 
         <!-- Transaction Items -->
-        @foreach([
-            [
-                'id' => 'RP-789012',
-                'product' => 'Royal Play Coins 120M',
-                'date' => '12 Jan 2023, 14:30',
-                'method' => 'QRIS',
-                'amount' => 'Rp 10.000',
-                'status' => 'success',
-                'status_text' => 'Berhasil'
-            ],
-            [
-                'id' => 'RP-789011',
-                'product' => 'Royal Play Coins 250M',
-                'date' => '10 Jan 2023, 09:15',
-                'method' => 'Bank BRI',
-                'amount' => 'Rp 21.000',
-                'status' => 'success',
-                'status_text' => 'Berhasil'
-            ],
-            [
-                'id' => 'RP-789010',
-                'product' => 'Royal Play Coins 500M',
-                'date' => '5 Jan 2023, 18:45',
-                'method' => 'ShopeePay',
-                'amount' => 'Rp 35.000',
-                'status' => 'success',
-                'status_text' => 'Berhasil'
-            ],
-            [
-                'id' => 'RP-789009',
-                'product' => 'Royal Play Coins 1B',
-                'date' => '2 Jan 2023, 11:20',
-                'method' => 'Bank BNI',
-                'amount' => 'Rp 70.000',
-                'status' => 'failed',
-                'status_text' => 'Gagal'
-            ],
-            [
-                'id' => 'RP-789008',
-                'product' => 'Royal Play Coins 2B',
-                'date' => '28 Des 2022, 16:10',
-                'method' => 'DANA',
-                'amount' => 'Rp 141.000',
-                'status' => 'pending',
-                'status_text' => 'Pending'
-            ]
-        ] as $transaction)
+        @foreach($orders as $order)
         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-4 border-b border-gray-200 hover:bg-gray-50 transition-colors">
             <!-- Mobile View -->
             <div class="md:hidden flex justify-between items-start">
                 <div>
-                    <div class="font-medium text-gray-900">{{ $transaction['product'] }}</div>
-                    <div class="text-sm text-gray-500 mt-1">{{ $transaction['date'] }}</div>
+                    <div class="font-medium text-gray-900">{{ $order->produk }}</div>
+                    <div class="text-sm text-gray-500 mt-1">{{ \Carbon\Carbon::parse($order->tanggal)->format('d M Y, H:i') }}</div>
                 </div>
                 <span class="px-2 py-1 rounded-full text-xs font-medium 
-                    {{ $transaction['status'] === 'success' ? 'bg-green-100 text-green-800' : '' }}
-                    {{ $transaction['status'] === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                    {{ $transaction['status'] === 'failed' ? 'bg-red-100 text-red-800' : '' }}">
-                    {{ $transaction['status_text'] }}
+                    @if($order->status === 'Berhasil' || $order->status === 'success') bg-green-100 text-green-800
+                    @elseif($order->status === 'Pending' || $order->status === 'pending') bg-yellow-100 text-yellow-800
+                    @elseif($order->status === 'Gagal' || $order->status === 'failed') bg-red-100 text-red-800
+                    @else bg-gray-100 text-gray-800 @endif">
+                    @if($order->status === 'Berhasil' || $order->status === 'success') Berhasil
+                    @elseif($order->status === 'Pending' || $order->status === 'pending') Pending
+                    @elseif($order->status === 'Gagal' || $order->status === 'failed') Gagal
+                    @else {{ $order->status }} @endif
                 </span>
             </div>
             
             <!-- Desktop View -->
             <div class="hidden md:block col-span-2 text-sm text-gray-900">
-                {{ $transaction['id'] }}
+                {{ $order->id_transaksi }}
             </div>
             <div class="hidden md:block col-span-3 text-sm text-gray-900">
-                {{ $transaction['product'] }}
+                {{ $order->produk }}
             </div>
             <div class="hidden md:block col-span-2 text-sm text-gray-500">
-                {{ $transaction['date'] }}
+                {{ \Carbon\Carbon::parse($order->tanggal)->format('d M Y, H:i') }}
             </div>
             <div class="hidden md:block col-span-2 text-sm text-gray-500">
-                {{ $transaction['method'] }}
+                {{ $order->metode }}
             </div>
             <div class="hidden md:block col-span-1 text-sm font-medium text-gray-900">
-                {{ $transaction['amount'] }}
+                Rp {{ number_format($order->total, 0, ',', '.') }}
             </div>
             <div class="hidden md:block col-span-2">
                 <span class="px-3 py-1 rounded-full text-xs font-medium 
-                    {{ $transaction['status'] === 'success' ? 'bg-green-100 text-green-800' : '' }}
-                    {{ $transaction['status'] === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                    {{ $transaction['status'] === 'failed' ? 'bg-red-100 text-red-800' : '' }}">
-                    {{ $transaction['status_text'] }}
+                    @if($order->status === 'Berhasil' || $order->status === 'success') bg-green-100 text-green-800
+                    @elseif($order->status === 'Pending' || $order->status === 'pending') bg-yellow-100 text-yellow-800
+                    @elseif($order->status === 'Gagal' || $order->status === 'failed') bg-red-100 text-red-800
+                    @else bg-gray-100 text-gray-800 @endif">
+                    @if($order->status === 'Berhasil' || $order->status === 'success') Berhasil
+                    @elseif($order->status === 'Pending' || $order->status === 'pending') Pending
+                    @elseif($order->status === 'Gagal' || $order->status === 'failed') Gagal
+                    @else {{ $order->status }} @endif
                 </span>
             </div>
             
             <!-- Mobile View Amount -->
             <div class="md:hidden flex justify-between items-center">
-                <div class="text-sm text-gray-500">{{ $transaction['method'] }}</div>
-                <div class="text-sm font-medium text-gray-900">{{ $transaction['amount'] }}</div>
+                <div class="text-sm text-gray-500">{{ $order->metode }}</div>
+                <div class="text-sm font-medium text-gray-900">Rp {{ number_format($order->total, 0, ',', '.') }}</div>
             </div>
             
             <!-- Mobile View Details Button -->

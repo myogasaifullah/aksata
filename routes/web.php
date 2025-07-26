@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminGameController;
 use App\Http\Controllers\AdminHargaController;
 use App\Http\Controllers\Auth\AdminRateController;
 use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
+use App\Http\Controllers\PublicRateController;
 
 use App\Models\Game;
 
@@ -23,13 +24,13 @@ Route::get('/', function () {
     return view('pages.beranda', compact('games', 'rates'));
 })->name('beranda');
 
+Route::post('/public-rate', [PublicRateController::class, 'store'])->name('public.rate.store');
+
 Route::get('/syarat-ketentuan', function () {
     return view('pages.syarat-ketentuan');
 })->name('syarat-ketentuan');
 
-Route::get('/riwayat-pembelian', function () {
-    return view('pages.riwayat-pembelian');
-})->name('riwayat-pembelian');
+Route::get('/riwayat-pembelian', [AdminOrderController::class, 'history'])->name('riwayat-pembelian');
 
 
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');

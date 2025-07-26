@@ -74,31 +74,33 @@
     </div>
 
     <!-- Popular Games Section -->
-    <div id="popular-games" class="mb-16">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900">🎮 Game Populer</h2>
+  <div id="popular-games" class="mb-16 px-6">
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">🎮 Game Populer</h2>
+    </div>
 
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            @foreach($games as $game)
-            <a href="{{ route('show') }}" class="group block">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+        @foreach($games as $game)
+            <a href="{{ route('game.show', $game->id) }}" class="group block">
                 <div class="relative overflow-hidden rounded-xl aspect-[3/4] shadow-sm hover:shadow-md transition-shadow">
                     <img
-                        src="{{ $game->gambar }}"
-                        alt="{{ $game->nama }}"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+  src="{{ $game->gambar ?? asset('images/default-game.png') }}"
+  alt="{{ $game->nama }}"
+  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                        <span class="text-xs text-white bg-purple-600 px-2 py-1 rounded-full self-start mb-2">{{ $game->deskripsi }}</span>
+                        @if($game->deskripsi)
+                            <span class="text-xs text-white bg-purple-600 px-2 py-1 rounded-full self-start mb-2">
+                                {{ $game->deskripsi }}
+                            </span>
+                        @endif
                         <h3 class="text-white font-semibold">{{ $game->nama }}</h3>
                     </div>
                 </div>
             </a>
-            @endforeach
-        </div>
+        @endforeach
     </div>
-
-
+</div>
 
     <!-- Testimonials -->
     <div class="bg-purple-50 rounded-2xl p-8 md:p-12 mb-16">

@@ -211,5 +211,6 @@
       gameIdToDelete = null;
     });
   });
+  
 </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminEwaletController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,15 @@ use App\Http\Controllers\AdminHargaController;
 use App\Http\Controllers\Auth\AdminRateController;
 use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
 use App\Http\Controllers\PublicRateController;
-
+use App\Models\Ewalet;
 use App\Models\Game;
-
 use App\Models\Rate;
+use App\Models\Payment;
+use App\Models\Qr;
+
+// ==============================
+// Halaman Publik
+// ==============================
 
 Route::get('/', function () {
     $games = Game::all();
@@ -30,46 +36,49 @@ Route::get('/syarat-ketentuan', function () {
     return view('pages.syarat-ketentuan');
 })->name('syarat-ketentuan');
 
-Route::get('/riwayat-pembelian', [AdminOrderController::class, 'history'])->name('riwayat-pembelian');
+Route::get('/riwayat-pembelian', function () {
+    return view('pages.riwayat-pembelian');
+})->name('riwayat-pembelian');
 
 
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');
-use App\Models\Payment;
 
-use App\Models\Qr;
-
-Route::get('/show', function () {
+// ✅ Menampilkan halaman detail game berdasarkan ID
+Route::get('/game/{id}', function ($id) {
+    $game = Game::findOrFail($id);
     $payments = Payment::all();
     $qrs = Qr::all();
-    return view('pages.game-detail', compact('payments', 'qrs'));
-})->name('show');
+    $ewalets = Ewalet::all();
+    return view('pages.game-detail', compact('game', 'payments', 'qrs', 'ewalets'));
+})->name('game.show');
 
+// ✅ Konfirmasi Pembayaran
 Route::get('/konfirmasi-pembayaran', function () {
     $qrs = Qr::all();
     return view('pages.konfirmasi-pembayaran', compact('qrs'));
 })->name('konfirmasi-pembayaran');
 
+// ==============================
+// Autentikasi
+// ==============================
 
-// Halaman login
-Route::get('/login', function () {
-    return view('auth/login');
-});
-
-// Logout
+Route::get('/login', fn() => view('auth/login'));
 Route::post('logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
 
-// Dashboard
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ==============================
+// Dashboard & Admin Area
+// ==============================
 
-// Semua route dilindungi auth
+Route::get('/dashboard', fn() => view('admin/dashboard'))
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 Route::middleware(['auth'])->group(function () {
 
-    // Profile
+    // Profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -92,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/harga/{harga}', [AdminHargaController::class, 'update'])->name('admin.harga.update');
     Route::delete('/harga/{harga}', [AdminHargaController::class, 'destroy'])->name('admin.harga.destroy');
 
-    // Games
+    // Game
     Route::get('/games', [AdminGameController::class, 'index'])->name('admin.games.index');
     Route::post('/games', [AdminGameController::class, 'store'])->name('admin.games.store');
     Route::get('/games/{game}/edit', [AdminGameController::class, 'edit'])->name('admin.games.edit');
@@ -112,11 +121,17 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/orders/{id}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
     Route::delete('/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
 
-    // ⭐ Rate (bintang, nama, deskripsi) via AdminRateController
+    // Rate
     Route::get('/rate', [AdminRateController::class, 'index'])->name('admin.rate.index');
     Route::post('/rate', [AdminRateController::class, 'store'])->name('admin.rate.store');
     Route::put('/rate/{id}', [AdminRateController::class, 'update'])->name('admin.rate.update');
     Route::delete('/rate/{id}', [AdminRateController::class, 'destroy'])->name('admin.rate.destroy');
+
+    // Ewalet
+    Route::get('/ewalet', [AdminEwaletController::class, 'index'])->name('admin.ewalet.index');
+    Route::post('/ewalet', [AdminEwaletController::class, 'store'])->name('admin.ewalet.store');
+    Route::put('/ewalet/{ewalet}', [AdminEwaletController::class, 'update'])->name('admin.ewalet.update');
+    Route::delete('/ewalet/{ewalet}', [AdminEwaletController::class, 'destroy'])->name('admin.ewalet.destroy');
 });
 
 require __DIR__ . '/auth.php';

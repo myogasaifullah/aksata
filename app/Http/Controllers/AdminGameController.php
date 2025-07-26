@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AdminGameController extends Controller
 {
+   public function beranda()
+    {
+        $games = Game::all();
+        $rates = Rate::all(); // Optional
+        return view('pages.beranda', compact('games', 'rates'));
+    }
+   
     public function index()
     {
         $games = Game::all();
@@ -24,7 +32,7 @@ class AdminGameController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'gambar' => 'required|image|max:2048',
-            'deskripsi' => 'nullable|string', // ← Validasi deskripsi
+            'deskripsi' => 'nullable|string',
         ]);
 
         if (!Storage::exists('public/games')) {
@@ -36,7 +44,7 @@ class AdminGameController extends Controller
         Game::create([
             'nama' => $request->nama,
             'gambar' => Storage::url($path),
-            'deskripsi' => $request->deskripsi, // ← Simpan deskripsi
+            'deskripsi' => $request->deskripsi,
         ]);
 
         return redirect()->route('admin.games.index')->with('success', 'Game created successfully.');
@@ -52,7 +60,7 @@ class AdminGameController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'gambar' => 'nullable|image|max:2048',
-            'deskripsi' => 'nullable|string', // ← Validasi deskripsi
+            'deskripsi' => 'nullable|string',
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -70,7 +78,7 @@ class AdminGameController extends Controller
         }
 
         $game->nama = $request->nama;
-        $game->deskripsi = $request->deskripsi; // ← Update deskripsi
+        $game->deskripsi = $request->deskripsi;
         $game->save();
 
         return redirect()->route('admin.games.index')->with('success', 'Game updated successfully.');
@@ -87,4 +95,11 @@ class AdminGameController extends Controller
 
         return redirect()->route('admin.games.index')->with('success', 'Game deleted successfully.');
     }
+
+ public function show($id)
+    {
+        $game = Game::findOrFail($id);
+        return view('pages.game-detail', compact('game'));
+    }
+
 }

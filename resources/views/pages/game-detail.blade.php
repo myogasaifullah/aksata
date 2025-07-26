@@ -7,53 +7,60 @@
 
     <!-- Game Detail Header -->
 <!-- Game Detail Header - Improved Version -->
-<div class="bg-gradient-to-r from-purple-50 to-indigo-50 shadow-lg rounded-2xl p-6 md:flex md:items-center md:gap-6 transition-all duration-300 hover:shadow-xl border border-purple-100">
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-purple-700">Detail Game</h1>
 
-    <!-- Game Icon with shine effect -->
-    <div class="flex-shrink-0 mb-4 md:mb-0 relative group">
-        <div class="absolute inset-0 bg-purple-200 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-300"></div>
-        <img src="{{ asset('storage/images/royal.jpg') }}"
-             alt="Royal Play Icon"
-             class="w-28 h-28 md:w-32 md:h-32 rounded-xl object-cover ring-2 ring-purple-500/30 shadow-md transition-all duration-300 group-hover:ring-purple-500/60 group-hover:scale-[1.03]">
-    </div>
+    <div class="bg-gradient-to-r from-purple-50 to-indigo-50 shadow-lg rounded-2xl p-6 md:flex md:items-center md:gap-6 transition-all duration-300 hover:shadow-xl border border-purple-100 mb-6 hover:scale-[1.01]">
 
-    <!-- Game Information -->
-    <div class="flex-1 space-y-3">
-        <!-- Title and Badge -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
-                Royal Play Coins
-            </h1>
-            <span class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm w-fit">
-                Domino Game
-            </span>
-        </div>
+        <!-- Game Icon -->
+        <div class="flex-shrink-0 mb-4 md:mb-0 relative group">
+    <div class="absolute inset-0 bg-purple-200 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-300"></div>
+    <img src="{{ $game->gambar }}"
+        alt="{{ $game->nama }}"
+        class="w-28 h-28 md:w-32 md:h-32 rounded-xl object-cover ring-2 ring-purple-500/30 shadow-md transition-all duration-300 group-hover:ring-purple-500/60 group-hover:scale-[1.03]">
+</div>
 
-        <!-- Publisher -->
-        <p class="text-sm text-gray-600 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-            </svg>
-            <span class="font-semibold text-purple-600">HIGOGAME</span>
-        </p>
 
-        <!-- Info Badges -->
-        <div class="flex flex-wrap gap-4 text-sm mt-3">
-            <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-inner border border-purple-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="text-gray-700">15-30 Menit</span>
+        <!-- Game Info -->
+        <div class="flex-1 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                    {{ $game->nama }}
+                </h2>
+                <span class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm w-fit">
+                    Domino Game
+                </span>
             </div>
-            <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-inner border border-purple-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+
+            <p class="text-sm text-gray-600 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
-                <span class="text-gray-700">Buka 24 Jam</span>
+                <span class="font-semibold text-purple-600">HIGOGAME</span>
+            </p>
+
+            <p class="text-gray-700 text-sm">
+                {{ $game->deskripsi }}
+            </p>
+
+            <div class="flex flex-wrap gap-4 text-sm mt-3">
+                <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-inner border border-purple-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-gray-700">15-30 Menit</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-inner border border-purple-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                    </svg>
+                    <span class="text-gray-700">Buka 24 Jam</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
     <!-- Deskripsi Game - Improved Version -->
 <div class="mt-10 bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100">
@@ -277,26 +284,47 @@
             </button>
             
             <div x-show="open" x-collapse class="bg-white border-t border-gray-200">
-                @foreach ($qrs as $qr)
-                    <div @click="selectedPayment = { type: 'ewallet', method: 'QR Code', value: '' }"
-                         class="flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50"
-                         :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === 'QR Code' }">
-                        <div class="flex items-center gap-4">
-                            <img src="{{ asset('storage/' . $qr->gambar) }}" alt="QR Code" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-                            <span class="font-medium text-gray-800">QR Code</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="font-semibold text-gray-700"></span>
-                            <div x-show="selectedPayment && selectedPayment.method === 'QR Code'" 
-                                 class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div> 
+    {{-- Tampilkan QR Code dari table `qrs` --}}
+    @foreach ($qrs as $qr)
+        <div @click="selectedPayment = { type: 'ewallet', method: 'QR Code', value: '{{ $qr->id }}' }"
+             class="flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50"
+             :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}' }">
+            <div class="flex items-center gap-4">
+                <img src="{{ asset('storage/' . $qr->gambar) }}" alt="QR Code" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+                <span class="font-medium text-gray-800">QR Code</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div x-show="selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}'" 
+                     class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    {{-- Tampilkan E-Walet dari table `ewalets` --}}
+    @foreach ($ewalets as $ewalet)
+        <div @click="selectedPayment = { type: 'ewallet', method: '{{ $ewalet->nama }}', value: '{{ $ewalet->id }}' }"
+             class="flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50"
+             :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}' }">
+            <div class="flex items-center gap-4">
+                <img src="{{ asset('storage/' . $ewalet->gambar) }}" alt="{{ $ewalet->nama }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+                <span class="font-medium text-gray-800">{{ $ewalet->nama }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div x-show="selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}'" 
+                     class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
         </div>
     </div>
 </div>

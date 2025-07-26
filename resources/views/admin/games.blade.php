@@ -207,7 +207,7 @@
       } catch (error) {
         // Optional: handle error
       }
-      deleteGameModal.hide();
+      deleteGameModal.hide(); 
       gameIdToDelete = null;
     });
   });

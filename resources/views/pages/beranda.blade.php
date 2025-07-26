@@ -102,34 +102,127 @@
     </div>
 </div>
 
-    <!-- Testimonials -->
-    <div class="bg-purple-50 rounded-2xl p-8 md:p-12 mb-16">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Apa Kata Pelanggan Kami?</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            @foreach($rates as $rate)
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <div class="flex items-center mb-4">
-                    <div class="text-yellow-400 mr-2">
-                        @for ($i = 0; $i < $rate->stars; $i++)
-                            ★
-                        @endfor
-                    </div>
+    <!-- Testimonials Section -->
+<div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8 md:p-12 mb-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Apa Kata Pelanggan Kami?</h2>
+    
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        @foreach($rates as $rate)
+        <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+                <div class="text-yellow-400 mr-2 text-lg">
+                    @for ($i = 0; $i < $rate->stars; $i++)
+                        ★
+                    @endfor
+                    @for ($i = $rate->stars; $i < 5; $i++)
+                        ☆
+                    @endfor
                 </div>
-                <p class="text-gray-600 italic mb-4">"{{ $rate->description }}"</p>
-                <div class="flex items-center">
-                    <div class="bg-purple-100 text-purple-800 w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">
-                        {{ substr($rate->name, 0, 1) }}
-                    </div>
-                    <div>
-                        <h4 class="font-medium text-gray-900">{{ $rate->name }}</h4>
-                        <p class="text-sm text-gray-500"></p>
-                    </div>
+                <span class="text-sm text-gray-500">({{ $rate->stars }}/5)</span>
+            </div>
+            <p class="text-gray-600 italic mb-4">"{{ $rate->description }}"</p>
+            <div class="flex items-center">
+                <div class="bg-purple-100 text-purple-800 w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">
+                    {{ substr($rate->name, 0, 1) }}
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-900">{{ $rate->name }}</h4>
+                    <p class="text-sm text-gray-500">{{ $rate->created_at->format('d M Y') }}</p>
                 </div>
             </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
+
+    <!-- Customer Input Form -->
+    <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm max-w-3xl mx-auto">
+        <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Bagikan Pengalaman Anda</h3>
+        
+        <form method="POST" action="{{ route('public.rate.store') }}" class="space-y-4">
+            @csrf
+            
+            <!-- Name Input -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Anda</label>
+                <input type="text" id="name" name="name" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                       placeholder="Masukkan nama Anda">
+            </div>
+
+            <!-- Kode Transaksi Input -->
+            <div>
+                <label for="transaction_id" class="block text-sm font-medium text-gray-700 mb-1">Kode Transaksi</label>
+            <input type="text" id="transaction_id" name="transaction_id" required
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all @error('transaction_id') border-red-500 @enderror"
+                   placeholder="Masukkan Kode Transaksi Anda" value="{{ old('transaction_id') }}">
+            @error('transaction_id')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+            </div>
+            
+            <!-- Rating Input -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                <div class="flex space-x-2">
+                    @for($i = 1; $i <= 5; $i++)
+                        <button type="button" onclick="setRating({{ $i }})" 
+                                class="text-2xl focus:outline-none rating-star"
+                                data-rating="{{ $i }}">
+                            ☆
+                        </button>
+                    @endfor
+                </div>
+                <input type="hidden" id="stars" name="stars" value="0" required>
+            </div>
+            
+            <!-- Testimonial Input -->
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Testimonial</label>
+                <textarea id="description" name="description" rows="4" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                          placeholder="Bagikan pengalaman Anda..."></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="pt-2">
+                <button type="submit" 
+                        class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+                    Kirim Testimonial
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Rating star selection
+    function setRating(rating) {
+        // Update hidden input value
+        document.getElementById('stars').value = rating;
+        
+        // Update star display
+        const stars = document.querySelectorAll('.rating-star');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.textContent = '★';
+                star.classList.add('text-yellow-400');
+            } else {
+                star.textContent = '☆';
+                star.classList.remove('text-yellow-400');
+            }
+        });
+    }
+</script>
+
+<style>
+    .rating-star {
+        transition: all 0.2s ease;
+    }
+    .rating-star:hover {
+        transform: scale(1.2);
+    }
+</style>
 
     <!-- CTA Section -->
     <div class="text-center bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 md:p-12 text-white">

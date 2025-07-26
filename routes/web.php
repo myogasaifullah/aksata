@@ -11,8 +11,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AdminGameController;
 use App\Http\Controllers\AdminHargaController;
 use App\Http\Controllers\Auth\AdminRateController;
-use App\Http\Controllers\auth\AdminDeskripsiController;
-use App\Http\Controllers\AdminEwaletController;
+use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
 
 use App\Models\Ewalet;
 use App\Models\Game;
@@ -30,8 +29,17 @@ Route::get('/', function () {
     return view('pages.beranda', compact('games', 'rates'));
 })->name('beranda');
 
-Route::get('/syarat-ketentuan', fn() => view('pages.syarat-ketentuan'))->name('syarat-ketentuan');
-Route::get('/riwayat-pembelian', fn() => view('pages.riwayat-pembelian'))->name('riwayat-pembelian');
+Route::post('/public-rate', [PublicRateController::class, 'store'])->name('public.rate.store');
+
+Route::get('/syarat-ketentuan', function () {
+    return view('pages.syarat-ketentuan');
+})->name('syarat-ketentuan');
+
+Route::get('/riwayat-pembelian', function () {
+    return view('pages.riwayat-pembelian');
+})->name('riwayat-pembelian');
+
+
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');
 
 // ✅ Menampilkan halaman detail game berdasarkan ID

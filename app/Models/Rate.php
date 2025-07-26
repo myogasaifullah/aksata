@@ -9,5 +9,5 @@ class Rate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['stars', 'name', 'description'];
+    protected $fillable = ['stars', 'name', 'description', 'transaction_id'];
 }

@@ -36,9 +36,7 @@ Route::get('/syarat-ketentuan', function () {
     return view('pages.syarat-ketentuan');
 })->name('syarat-ketentuan');
 
-Route::get('/riwayat-pembelian', function () {
-    return view('pages.riwayat-pembelian');
-})->name('riwayat-pembelian');
+Route::get('/riwayat-pembelian', [App\Http\Controllers\Auth\AdminOrderController::class, 'history'])->name('riwayat-pembelian');
 
 
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');

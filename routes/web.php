@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminEwaletController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,7 @@ use App\Http\Controllers\AdminGameController;
 use App\Http\Controllers\AdminHargaController;
 use App\Http\Controllers\Auth\AdminRateController;
 use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
-
+use App\Http\Controllers\PublicRateController;
 use App\Models\Ewalet;
 use App\Models\Game;
 use App\Models\Rate;

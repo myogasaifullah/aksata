@@ -64,15 +64,11 @@
         Top Up Royal Play Domino Chip Murah
     </h2>
     <div class="text-gray-700 leading-relaxed space-y-3 text-justify">
-        <p>Royal Play adalah permainan domino yang populer di Indonesia. Ini adalah variasi dari permainan domino tradisional yang dimainkan dengan menggunakan set kartu domino berjumlah 28 buah.</p>
-        
+        <p>Royal Play adalah permainan domino yang populer di Indonesia. Ini adalah variasi dari permainan domino tradisional yang dimainkan dengan menggunakan set kartu domino berjumlah 28 buah. Permainan Royal Domino umumnya dimainkan oleh 4 orang pemain. Aturan dan cara bermain dapat bervariasi tergantung pada preferensi pemain atau versi yang dimainkan.</p>
         <div class="bg-purple-50 border-l-4 border-purple-500 p-3 rounded-r">
             <p class="font-medium text-purple-800">Cara Bermain:</p>
             <p>Setiap pemain akan diberikan sejumlah kartu dan harus mencoba mengeluarkan kartu tersebut secara strategis untuk mencapai nilai tertinggi dengan menyusun dan memainkan kartu-kartu domino.</p>
-        </div>
         
-        <p>Permainan Royal Domino umumnya dimainkan oleh 4 orang pemain. Aturan dan cara bermain dapat bervariasi tergantung pada preferensi pemain atau versi yang dimainkan.</p>
-    </div>
 </div>
 <!-- Header with Progress Steps -->
 <div class="mb-10 mt-10 text-center">

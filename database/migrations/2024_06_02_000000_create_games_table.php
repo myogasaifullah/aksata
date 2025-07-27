@@ -11,13 +11,14 @@ class CreateGamesTable extends Migration
      *
      * @return void
      */
-    public function up()
+     public function up()
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('gambar');
             $table->string('nama');
-            $table->text('deskripsi'); // ← Tambahan kolom deskripsi
+            $table->text('deskripsi');       // ← Kolom deskripsi
+            $table->text('cara_bermain')->nullable(); // ← Tambahan cara bermain
             $table->timestamps();
         });
     }

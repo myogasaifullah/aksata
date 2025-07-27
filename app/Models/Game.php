@@ -9,9 +9,10 @@ class Game extends Model
 {
     use HasFactory;
 
-    // Tambahkan 'deskripsi' ke fillable agar bisa diisi saat create/update
-    protected $fillable = ['gambar', 'nama', 'deskripsi'];
+    // Tambahkan semua kolom yang dapat diisi (fillable)
+    protected $fillable = ['gambar', 'nama', 'deskripsi', 'cara_bermain'];
 
+    // Relasi ke model Harga (jika ada)
     public function hargas()
     {
         return $this->hasMany(Harga::class);

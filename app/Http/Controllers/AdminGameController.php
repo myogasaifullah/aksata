@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminGameController extends Controller
 {
-   public function beranda()
+    public function beranda()
     {
         $games = Game::all();
         $rates = Rate::all(); // Optional
         return view('pages.beranda', compact('games', 'rates'));
     }
-   
+
     public function index()
     {
         $games = Game::all();
@@ -33,6 +33,7 @@ class AdminGameController extends Controller
             'nama' => 'required|string|max:255',
             'gambar' => 'required|image|max:2048',
             'deskripsi' => 'nullable|string',
+            'cara_bermain' => 'nullable|string',
         ]);
 
         if (!Storage::exists('public/games')) {
@@ -45,6 +46,7 @@ class AdminGameController extends Controller
             'nama' => $request->nama,
             'gambar' => Storage::url($path),
             'deskripsi' => $request->deskripsi,
+            'cara_bermain' => $request->cara_bermain,
         ]);
 
         return redirect()->route('admin.games.index')->with('success', 'Game created successfully.');
@@ -61,6 +63,7 @@ class AdminGameController extends Controller
             'nama' => 'required|string|max:255',
             'gambar' => 'nullable|image|max:2048',
             'deskripsi' => 'nullable|string',
+            'cara_bermain' => 'nullable|string',
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -79,6 +82,7 @@ class AdminGameController extends Controller
 
         $game->nama = $request->nama;
         $game->deskripsi = $request->deskripsi;
+        $game->cara_bermain = $request->cara_bermain;
         $game->save();
 
         return redirect()->route('admin.games.index')->with('success', 'Game updated successfully.');
@@ -96,10 +100,9 @@ class AdminGameController extends Controller
         return redirect()->route('admin.games.index')->with('success', 'Game deleted successfully.');
     }
 
- public function show($id)
+    public function show($id)
     {
         $game = Game::findOrFail($id);
         return view('pages.game-detail', compact('game'));
     }
-
 }

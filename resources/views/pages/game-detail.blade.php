@@ -39,9 +39,7 @@
                 <span class="font-semibold text-purple-600">HIGOGAME</span>
             </p>
 
-            <p class="text-gray-700 text-sm">
-                {{ $game->deskripsi }}
-            </p>
+            
 
             <div class="flex flex-wrap gap-4 text-sm mt-3">
                 <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-inner border border-purple-100">
@@ -71,10 +69,10 @@
         Top Up Royal Play Domino Chip Murah
     </h2>
     <div class="text-gray-700 leading-relaxed space-y-3 text-justify">
-        <p>Royal Play adalah permainan domino yang populer di Indonesia. Ini adalah variasi dari permainan domino tradisional yang dimainkan dengan menggunakan set kartu domino berjumlah 28 buah. Permainan Royal Domino umumnya dimainkan oleh 4 orang pemain. Aturan dan cara bermain dapat bervariasi tergantung pada preferensi pemain atau versi yang dimainkan.</p>
+        <p>{{ $game->deskripsi }}</p>
         <div class="bg-purple-50 border-l-4 border-purple-500 p-3 rounded-r">
             <p class="font-medium text-purple-800">Cara Bermain:</p>
-            <p>Setiap pemain akan diberikan sejumlah kartu dan harus mencoba mengeluarkan kartu tersebut secara strategis untuk mencapai nilai tertinggi dengan menyusun dan memainkan kartu-kartu domino.</p>
+            <p>{{ $game->cara_bermain }}</p>
         
 </div>
 <!-- Header with Progress Steps -->

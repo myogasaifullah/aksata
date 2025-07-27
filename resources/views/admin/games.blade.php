@@ -35,6 +35,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deskripsi</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cara Bermain</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                 </tr>
@@ -49,6 +50,7 @@
                   </td>
                   <td><p class="text-xs font-weight-bold mb-0">{{ $game->nama }}</p></td>
                   <td><p class="text-xs mb-0">{{ Str::limit($game->deskripsi, 50) }}</p></td>
+                  <td><p class="text-xs mb-0">{{ Str::limit($game->cara_bermain, 50) }}</p></td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{ $game->created_at->format('d/m/Y') }}</span>
                   </td>
@@ -58,7 +60,8 @@
                       data-id="{{ $game->id }}"
                       data-nama="{{ $game->nama }}"
                       data-deskripsi="{{ $game->deskripsi }}"
-                      data-gambar="{{ $game->gambar }}">
+                      data-gambar="{{ $game->gambar }}"
+                      data-cara_bermain="{{ $game->cara_bermain }}">
                       <i class="material-icons text-sm me-2">edit</i>Edit
                     </button>
                     <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-game-btn"
@@ -99,6 +102,10 @@
               <label class="form-label" for="addGameDesc"></label>
               <textarea class="form-control" id="addGameDesc" name="deskripsi" rows="3" placeholder="Tulis deskripsi game..."></textarea>
             </div>
+            <div class="input-group input-group-outline mb-3">
+              <label class="form-label" for="addGameCaraBermain"></label>
+              <textarea class="form-control" id="addGameCaraBermain" name="cara_bermain" rows="3" placeholder="Tulis cara bermain..."></textarea>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -133,6 +140,10 @@
               <label class="form-label" for="editGameDesc"></label>
               <textarea class="form-control" id="editGameDesc" name="deskripsi" placeholder="deskripsi" rows="3"></textarea>
             </div>
+            <div class="input-group input-group-outline mb-3">
+              <label class="form-label" for="editGameCaraBermain"></label>
+              <textarea class="form-control" id="editGameCaraBermain" name="cara_bermain" placeholder="cara bermain" rows="3"></textarea>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -142,7 +153,6 @@
       </div>
     </div>
   </div>
-
 
   <!-- Delete Confirmation Modal -->
   <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
@@ -175,11 +185,13 @@
         const gameId = this.getAttribute('data-id');
         const gameName = this.getAttribute('data-nama');
         const gameDeskripsi = this.getAttribute('data-deskripsi');
+        const gameCaraBermain = this.getAttribute('data-cara_bermain');
 
         editGameForm.action = `/games/${gameId}`;
         editGameForm.querySelector('#editGameName').value = gameName;
         editGameForm.querySelector('#editGameImage').value = '';
         editGameForm.querySelector('#editGameDesc').value = gameDeskripsi || '';
+        editGameForm.querySelector('#editGameCaraBermain').value = gameCaraBermain || '';
       });
     });
 
@@ -204,9 +216,7 @@
         if (response.status >= 200 && response.status < 400) {
           window.location.reload();
         }
-      } catch (error) {
-        // Optional: handle error
-      }
+      } catch (error) {}
       deleteGameModal.hide(); 
       gameIdToDelete = null;
     });

@@ -72,6 +72,7 @@
         <p>{{ $game->deskripsi }}</p>
         <div class="bg-purple-50 border-l-4 border-purple-500 p-3 rounded-r">
             <p class="font-medium text-purple-800">Cara Bermain:</p>
+            
             <p>{{ $game->cara_bermain }}</p>
         
 </div>

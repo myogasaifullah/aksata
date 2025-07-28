@@ -38,6 +38,7 @@ Route::get('/syarat-ketentuan', function () {
 
 Route::get('/riwayat-pembelian', [App\Http\Controllers\Auth\AdminOrderController::class, 'history'])->name('riwayat-pembelian');
 
+Route::post('/konfirmasi-pembayaran', [AdminOrderController::class, 'store'])->name('order.store');
 
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');
 

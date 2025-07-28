@@ -116,110 +116,127 @@
     </div>
 
     <!-- Improved Input Sections -->
-    @php
-    $steps = [
-        ['1', 'Cari Akun Anda', 'Masukkan User ID (Bukan Higgs)', '?'],
-        ['2', 'Cara Menghubungi Anda', 'Masukan Nomor Telp', '']
-    ];
-@endphp
-@foreach ($steps as [$num, $title, $placeholder, $hint])
-<div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-100 hover:border-purple-200 transition-all duration-200">
-    <div class="flex items-center mb-4">
-        <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">{{ $num }}</div>
-        <h3 class="text-lg font-semibold text-gray-800">{{ $title }}</h3>
-    </div>
-    <div class="relative">
-        <input type="text" placeholder="{{ $placeholder }}" 
-               class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-300 transition pl-10 bg-gray-50"/>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-    @if($hint)
-        <div class="flex items-center mt-3 text-sm text-gray-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="text-purple-600 font-medium cursor-pointer hover:underline">Petunjuk</span>
-        </div>
-    @endif
-</div>
-@endforeach
+    <form action="{{ route('order.store') }}" method="POST" class="mt-6">
+    @csrf
 
-    <!-- Step 3: Package Selection with Consistent Borders -->
-<div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-200" x-data="{ 
-    open: null,
-    selectedPackage: null 
-}">
-    <div class="flex items-center mb-4">
-        <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">3</div>
-        <h3 class="text-lg font-semibold text-gray-800">Pilih Paket</h3>
-    </div>
+    <!-- Hidden Fields -->
+    <input type="hidden" name="tanggal" value="{{ now()->toDateString() }}">
+    <input type="hidden" name="produk" value="{{ $game->nama }}">
+    <input type="hidden" name="total" value="0">
+    <input type="hidden" name="status" value="pending">
+    <input type="hidden" name="game_id" value="{{ $game->id }}">
     
-    <div class="space-y-3">
-        <!-- Package Type 1 -->
-        <div x-data="{ open: false }" class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300"
-            :class="{ 'border-purple-500': open }">
-            <button @click="open = !open" 
-                    class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all"
-                    :class="{ 'bg-gray-50': open }">
-                <div class="flex items-center gap-3">
-                    <span class="bg-yellow-100 p-2 rounded-lg border border-yellow-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <h4 class="font-medium text-gray-800">Top Up Koin Emas</h4>
-                        <p class="text-xs text-gray-500 mt-1">Pilih nominal yang diinginkan</p>
-                    </div>
+
+    @php
+        $steps = [
+            ['1', 'Cari Akun Anda', 'Masukkan User ID (Bukan Higgs)', '?', 'user_id'],
+            ['2', 'Cara Menghubungi Anda', 'Masukan Nomor Telp', '', 'no_telp']
+        ];
+    @endphp
+
+    @foreach ($steps as [$num, $title, $placeholder, $hint, $field])
+        <div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-100 hover:border-purple-200 transition-all duration-200">
+            <div class="flex items-center mb-4">
+                <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">
+                    {{ $num }}
                 </div>
-                <svg :class="{ 'rotate-180 text-purple-600': open }" 
-                     class="w-5 h-5 text-gray-500 transition-transform duration-300" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <h3 class="text-lg font-semibold text-gray-800">{{ $title }}</h3>
+            </div>
+            <div class="relative">
+                <input 
+                    type="text" 
+                    name="{{ $field }}" 
+                    placeholder="{{ $placeholder }}" 
+                    required 
+                    class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-300 transition pl-10 bg-gray-50"
+                />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-            </button>
-            
-            <div x-show="open" x-collapse class="bg-white border-t border-gray-200 p-4">
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    @if(isset($hargas) && $hargas->count() > 0)
-                        @foreach ($hargas as $harga)
-                            <div @click="selectedPackage = { label: '{{ $harga->jumlah }}', price: '{{ $harga->harga }}' }"
-                                 class="border border-gray-200 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:border-purple-300 hover:bg-purple-50"
-                                 :class="{ 'border-purple-500 bg-purple-50': selectedPackage && selectedPackage.label === '{{ $harga->jumlah }}' }">
-                                <div class="font-semibold text-gray-800">{{ $harga->jumlah }} Chip</div>
-                                <div class="text-sm text-gray-600 mt-1">Rp {{ number_format($harga->harga, 0, ',', '.') }}</div>
-                                <div x-show="selectedPackage && selectedPackage.label === '{{ $harga->jumlah }}'" 
-                                     class="flex justify-end mt-1">
-                                    <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+            </div>
+            @if($hint)
+                <div class="flex items-center mt-3 text-sm text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-purple-600 font-medium cursor-pointer hover:underline">Petunjuk</span>
+                </div>
+            @endif
+        </div>
+    @endforeach
+
+    <!-- Step 3: Package Selection -->
+    <div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-200" x-data="{ 
+        open: null,
+        selectedPackage: null 
+    }">
+        <div class="flex items-center mb-4">
+            <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">3</div>
+            <h3 class="text-lg font-semibold text-gray-800">Pilih Paket</h3>
+        </div>
+        
+        <!-- Input hidden untuk produk -->
+        <input type="hidden" name="produk" x-model="selectedPackage ? selectedPackage.label : ''">
+
+        <div class="space-y-3">
+            <!-- Package Type -->
+            <div x-data="{ open: false }" class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300"
+                :class="{ 'border-purple-500': open }">
+                <button @click="open = !open" 
+                        type="button"
+                        class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all"
+                        :class="{ 'bg-gray-50': open }">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-yellow-100 p-2 rounded-lg border border-yellow-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <h4 class="font-medium text-gray-800">Top Up Koin Emas</h4>
+                            <p class="text-xs text-gray-500 mt-1">Pilih nominal yang diinginkan</p>
+                        </div>
+                    </div>
+                    <svg :class="{ 'rotate-180 text-purple-600': open }" 
+                        class="w-5 h-5 text-gray-500 transition-transform duration-300" 
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                
+                <div x-show="open" x-collapse class="bg-white border-t border-gray-200 p-4">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        @if(isset($hargas) && $hargas->count() > 0)
+                            @foreach ($hargas as $harga)
+                                <div @click="selectedPackage = { label: '{{ $harga->jumlah }} Chip', price: '{{ $harga->harga }}' }"
+                                    class="border border-gray-200 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:border-purple-300 hover:bg-purple-50"
+                                    :class="{ 'border-purple-500 bg-purple-50': selectedPackage && selectedPackage.label === '{{ $harga->jumlah }} Chip' }">
+                                    <div class="font-semibold text-gray-800">{{ $harga->jumlah }} Chip</div>
+                                    <div class="text-sm text-gray-600 mt-1">Rp {{ number_format($harga->harga, 0, ',', '.') }}</div>
+                                    <div x-show="selectedPackage && selectedPackage.label === '{{ $harga->jumlah }} Chip'" 
+                                        class="flex justify-end mt-1">
+                                        <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <div class="text-gray-500">Harga paket tidak tersedia.</div>
-                    @endif
+                            @endforeach
+                        @else
+                            <div class="text-gray-500">Harga paket tidak tersedia.</div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Step 4: Payment Selection with Consistent Borders -->
-<div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-200" x-data="{ 
-    selectedPayment: null 
-}">
+<div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-200" x-data="{ selectedPayment: null }">
     <div class="flex items-center mb-4">
         <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">4</div>
         <h3 class="text-lg font-semibold text-gray-800">Pilih Pembayaran</h3>
     </div>
 
     <div class="space-y-3">
-        <div x-data="{ open: false }" class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300"
-            :class="{ 'border-purple-500': open }">
-            <button @click="open = !open" 
-                    class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all"
-                    :class="{ 'bg-gray-50': open }">
+        <!-- Bank Transfer Section -->
+        <div x-data="{ open: false }" class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300" :class="{ 'border-purple-500': open }">
+            <button @click="open = !open" class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all" :class="{ 'bg-gray-50': open }">
                 <div class="flex items-center gap-3">
                     <span class="bg-green-100 p-2 rounded-lg border border-green-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -231,42 +248,37 @@
                         <p class="text-xs text-gray-500 mt-1">BRI, BNI, Mandiri, CIMB</p>
                     </div>
                 </div>
-                <svg :class="{ 'rotate-180 text-purple-600': open }" 
-                     class="w-5 h-5 text-gray-500 transition-transform duration-300" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg :class="{ 'rotate-180 text-purple-600': open }" class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
-            
+
             <div x-show="open" x-collapse class="bg-white border-t border-gray-200">
-                @foreach ($payments as $payment)
-                    <div @click="selectedPayment = { type: 'bank', method: '{{ $payment->method }}', value: '{{ $payment->account_number }}' }"
-                         class="flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50"
-                         :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $payment->method }}' }">
-                        <div class="flex items-center gap-4">
-                            <img src="{{ asset('storage/' . $payment->image) }}" alt="{{ $payment->method }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-                            <span class="font-medium text-gray-800">{{ $payment->method }}</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="font-semibold text-gray-700">{{ $payment->account_number }}</span>
-                            <div x-show="selectedPayment && selectedPayment.method === '{{ $payment->method }}'" 
-                                 class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+@foreach ($payments as $payment)
+    <button type="button" @click.prevent="selectedPayment = { type: 'bank', method: '{{ $payment->method }}', value: '{{ $payment->account_number }}' }"
+         class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
+         :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $payment->method }}' }">
+        <div class="flex items-center gap-4">
+            <img src="{{ asset('storage/' . $payment->image) }}" alt="{{ $payment->method }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+            <span class="font-medium text-gray-800">{{ $payment->method }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="font-semibold text-gray-700">{{ $payment->account_number }}</span>
+            <div x-show="selectedPayment && selectedPayment.method === '{{ $payment->method }}'" 
+                 class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+    </button>
+@endforeach
             </div>
         </div>
 
-        <!-- E-Wallet -->
-        <div x-data="{ open: false }" class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300"
-            :class="{ 'border-purple-500': open }">
-            <button @click="open = !open" 
-                    class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all"
-                    :class="{ 'bg-gray-50': open }">
+        <!-- E-Wallet Section -->
+        <div x-data="{ open: false }" class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300" :class="{ 'border-purple-500': open }">
+            <button @click="open = !open" class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all" :class="{ 'bg-gray-50': open }">
                 <div class="flex items-center gap-3">
                     <span class="bg-blue-100 p-2 rounded-lg border border-blue-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -278,54 +290,50 @@
                         <p class="text-xs text-gray-500 mt-1">QRIS, ShopeePay, OVO, Dana</p>
                     </div>
                 </div>
-                <svg :class="{ 'rotate-180 text-purple-600': open }" 
-                     class="w-5 h-5 text-gray-500 transition-transform duration-300" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg :class="{ 'rotate-180 text-purple-600': open }" class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
-            
-            <div x-show="open" x-collapse class="bg-white border-t border-gray-200">
-    {{-- Tampilkan QR Code dari table `qrs` --}}
-    @foreach ($qrs as $qr)
-        <div @click="selectedPayment = { type: 'ewallet', method: 'QR Code', value: '{{ $qr->id }}' }"
-             class="flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50"
-             :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}' }">
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('storage/' . $qr->gambar) }}" alt="QR Code" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-                <span class="font-medium text-gray-800">QR Code</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <div x-show="selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}'" 
-                     class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-            </div>
-        </div>
-    @endforeach
 
-    {{-- Tampilkan E-Walet dari table `ewalets` --}}
-    @foreach ($ewalets as $ewalet)
-        <div @click="selectedPayment = { type: 'ewallet', method: '{{ $ewalet->nama }}', value: '{{ $ewalet->id }}' }"
-             class="flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50"
-             :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}' }">
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('storage/' . $ewalet->gambar) }}" alt="{{ $ewalet->nama }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-                <span class="font-medium text-gray-800">{{ $ewalet->nama }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <div x-show="selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}'" 
-                     class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                </div>
+            <div x-show="open" x-collapse class="bg-white border-t border-gray-200">
+@foreach ($qrs as $qr)
+    <button type="button" @click.prevent="selectedPayment = { type: 'ewallet', method: 'QR Code', value: '{{ $qr->id }}' }"
+         class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
+         :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}' }">
+        <div class="flex items-center gap-4">
+            <img src="{{ asset('storage/' . $qr->gambar) }}" alt="QR Code" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+            <span class="font-medium text-gray-800">QR Code</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <div x-show="selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}'" 
+                 class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
             </div>
         </div>
-    @endforeach
+    </button>
+@endforeach
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden field to capture the selected payment method -->
+    <input type="hidden" name="metode" :value="selectedPayment ? selectedPayment.method : ''" />
 </div>
+
+
+    <!-- Tombol Submit -->
+    <div class="mt-6 text-right">
+        <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-lg shadow">
+            Lanjutkan
+        </button>
+    </div>
+</form>
+
+
+<!-- Step 4: Payment Selection with Consistent Borders -->
+
 
         </div>
     </div>

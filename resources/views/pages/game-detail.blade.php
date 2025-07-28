@@ -183,18 +183,22 @@
             
             <div x-show="open" x-collapse class="bg-white border-t border-gray-200 p-4">
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    @foreach ([['120M', '10K'], ['250M', '21K'], ['500M', '35K'], ['1B', '70K'], ['2B', '141K'], ['3B', '212K']] as [$label, $price])
-                        <div @click="selectedPackage = { label: '{{ $label }}', price: '{{ $price }}' }"
-                             class="border border-gray-200 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:border-purple-300 hover:bg-purple-50"
-                             :class="{ 'border-purple-500 bg-purple-50': selectedPackage && selectedPackage.label === '{{ $label }}' }">
-                            <div class="font-semibold text-gray-800">{{ $label }} Chip</div>
-                            <div class="text-sm text-gray-600 mt-1">Rp {{ $price }}</div>
-                            <div x-show="selectedPackage && selectedPackage.label === '{{ $label }}'" 
-                                 class="flex justify-end mt-1">
-                                <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+                    @if(isset($hargas) && $hargas->count() > 0)
+                        @foreach ($hargas as $harga)
+                            <div @click="selectedPackage = { label: '{{ $harga->jumlah }}', price: '{{ $harga->harga }}' }"
+                                 class="border border-gray-200 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:border-purple-300 hover:bg-purple-50"
+                                 :class="{ 'border-purple-500 bg-purple-50': selectedPackage && selectedPackage.label === '{{ $harga->jumlah }}' }">
+                                <div class="font-semibold text-gray-800">{{ $harga->jumlah }} Chip</div>
+                                <div class="text-sm text-gray-600 mt-1">Rp {{ number_format($harga->harga, 0, ',', '.') }}</div>
+                                <div x-show="selectedPackage && selectedPackage.label === '{{ $harga->jumlah }}'" 
+                                     class="flex justify-end mt-1">
+                                    <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @else
+                        <div class="text-gray-500">Harga paket tidak tersedia.</div>
+                    @endif
                 </div>
             </div>
         </div>

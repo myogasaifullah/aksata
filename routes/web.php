@@ -42,13 +42,8 @@ Route::get('/riwayat-pembelian', [App\Http\Controllers\Auth\AdminOrderController
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');
 
 // ✅ Menampilkan halaman detail game berdasarkan ID
-Route::get('/game/{id}', function ($id) {
-    $game = Game::findOrFail($id);
-    $payments = Payment::all();
-    $qrs = Qr::all();
-    $ewalets = Ewalet::all();
-    return view('pages.game-detail', compact('game', 'payments', 'qrs', 'ewalets'));
-})->name('game.show');
+
+Route::get('/game/{id}', [AdminGameController::class, 'show'])->name('game.show');
 
 // ✅ Konfirmasi Pembayaran
 Route::get('/konfirmasi-pembayaran', function () {

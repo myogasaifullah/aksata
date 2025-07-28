@@ -156,6 +156,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Transaksi</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No Telp</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Produk</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ID Game</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Metode</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
@@ -169,6 +170,7 @@
                   <td>{{ $order->id_transaksi }}</td>
                   <td>{{ $order->no_telp }}</td>
                   <td>{{ $order->produk }}</td>
+                  <td>{{ $order->game_id }}</td>
                   <td>{{ $order->tanggal }}</td>
                   <td>{{ $order->metode }}</td>
                   <td>{{ $order->total }}</td>
@@ -201,6 +203,7 @@
                           <input type="text" name="id_transaksi" value="{{ $order->id_transaksi }}" class="form-control mb-2" required>
                           <input type="text" name="no_telp" value="{{ $order->no_telp }}" class="form-control mb-2" required>
                           <input type="text" name="produk" value="{{ $order->produk }}" class="form-control mb-2" required>
+                          <input type="text" name="game_id" value="{{ $order->game_id }}" class="form-control mb-2" required>
                           <input type="date" name="tanggal" value="{{ $order->tanggal }}" class="form-control mb-2" required>
                           <input type="text" name="metode" value="{{ $order->metode }}" class="form-control mb-2" required>
                           <input type="number" name="total" value="{{ $order->total }}" class="form-control mb-2" required>
@@ -233,9 +236,10 @@
             <h5 class="modal-title" id="createModalLabel">Tambah Order Baru</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
           </div>
-          <div class="modal-body">
+            <div class="modal-body">
             <input type="text" name="no_telp" placeholder="No Telepon" class="form-control mb-2" required>
             <input type="text" name="produk" placeholder="Produk" class="form-control mb-2" required>
+            <input type="text" name="game_id" placeholder="ID Game" class="form-control mb-2" required>
             <input type="date" name="tanggal" class="form-control mb-2" required>
             <input type="text" name="metode" placeholder="Metode Pembayaran" class="form-control mb-2" required>
             <input type="number" name="total" placeholder="Total" class="form-control mb-2" required>

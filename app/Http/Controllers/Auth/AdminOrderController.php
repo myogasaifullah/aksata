@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Game;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
 {
     public function index() {
         $orders = Order::all();
-        return view('admin.order', compact('orders'));
+        $games = Game::all();
+        return view('admin.order', compact('orders', 'games'));
     }
 
     public function history() {
@@ -26,6 +28,7 @@ class AdminOrderController extends Controller
             'metode' => 'required',
             'total' => 'required|numeric',
             'status' => 'required',
+            'game_id' => 'required|string',
         ]);
 
         $data = $request->all();
@@ -46,6 +49,7 @@ class AdminOrderController extends Controller
             'metode' => 'required',
             'total' => 'required|numeric',
             'status' => 'required',
+            'game_id' => 'required|string',
         ]);
 
         $order->update($request->all());

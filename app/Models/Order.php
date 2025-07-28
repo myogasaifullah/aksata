@@ -17,9 +17,8 @@ class Order extends Model
         'metode',
         'total',
         'status',
+        'game_id',
     ];
 
     public $timestamps = false;
 }
-
-

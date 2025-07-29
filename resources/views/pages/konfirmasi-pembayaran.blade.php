@@ -57,66 +57,50 @@
             <div class="space-y-4">
                 <div class="flex justify-between items-center">
                     <div class="text-gray-600">User ID</div>
-                    <div class="font-medium text-gray-900">123456789</div>
+                    <div class="font-medium text-gray-900">{{ $order->game_id }}</div>
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="text-gray-600">No. HP</div>
-                    <div class="font-medium text-gray-900">081234567890</div>
+                    <div class="font-medium text-gray-900">{{ $order->no_telp }}</div>
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="text-gray-600">Paket Dipilih</div>
-                    <div class="font-medium text-gray-900">Top Up Koin Emas 120M</div>
+                    <div class="font-medium text-gray-900">{{ $order->produk }}</div>
                 </div>
                 <div class="flex justify-between items-center pt-4 border-t border-gray-100">
                     <div class="text-gray-600 font-medium">Total Pembayaran</div>
-                    <div class="text-xl font-bold text-purple-600">Rp 10.000</div>
+                    <div class="text-xl font-bold text-purple-600">Rp {{ number_format($order->total, 0, ',', '.') }}</div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Payment Method Card -->
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-6 border border-gray-100">
-        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 px-6 py-4 border-b border-gray-100">
-            <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
-                Metode Pembayaran
-            </h2>
-        </div>
-        <div class="p-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                        <img src="{{ asset('/storage/images/qris.png') }}" alt="QRIS" class="h-8">
-                    </div>
-                    <div>
-                        <div class="font-medium text-gray-900">QRIS</div>
-                        <div class="text-xs text-gray-500 mt-1">Pembayaran Digital</div>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <div class="font-bold text-purple-600">Rp 10.000</div>
-                    <div class="text-xs text-gray-500 mt-1">Biaya admin: Rp 0</div>
-                </div>
-            </div>
-            
-            <!-- QR Code Section (Example) -->
-            <div class="mt-6 pt-6 border-t border-gray-100 text-center">
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 inline-block">
-                        @if($qrs->count() > 0)
-                            <img src="{{ asset('storage/' . $qrs[0]->gambar) }}" alt="QR Code" class="w-48 h-48 object-contain mb-3">
-                        @else
-                            <div class="w-48 h-48 bg-gray-100 flex items-center justify-center text-gray-400 mb-3">
-                                [QR Code]
-                            </div>
-                        @endif
-                    </div> 
-                <p class="text-sm text-gray-600 mt-3">Scan QR code di atas untuk melakukan pembayaran</p>
-            </div>
-        </div>
+<div class="bg-white rounded-2xl shadow-md overflow-hidden mb-6 border border-gray-100">
+    <div class="bg-gradient-to-r from-purple-50 to-indigo-50 px-6 py-4 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+            Metode Pembayaran
+        </h2>
     </div>
+    <div class="p-6 space-y-4">
+        @if ($ewallet)
+            <div class="text-gray-600">Metode: <strong>{{ $ewallet->nama }}</strong></div>
+            <div class="text-gray-600">Silakan scan QR berikut:</div>
+            <img src="{{ asset('storage/' . $ewallet->gambar) }}" alt="QR Code" class="w-48 h-48 object-contain">
+        @elseif ($payment)
+            <div class="text-gray-600">Metode: <strong>{{ $payment->method }}</strong></div>
+            <div class="text-gray-600">Silakan transfer ke rekening berikut:</div>
+            <img src="{{ asset('storage/' . $payment->image) }}" alt="Bukti Transfer" class="w-64 mb-2">
+            <p>No. Rekening: <strong>{{ $payment->account_number }}</strong></p>
+        @else
+            <p class="text-red-500">Metode pembayaran <strong>{{ $order->metode }}</strong> tidak ditemukan.</p>
+        @endif
+    </div>
+</div>
+
 
     <!-- Important Note -->
     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg mb-6">

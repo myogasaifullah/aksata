@@ -21,4 +21,14 @@ class Order extends Model
     ];
 
     public $timestamps = false;
+
+    public function metodePembayaran()
+    {
+        return $this->belongsTo(\App\Models\Payment::class, 'metode');
+    }
+
+    public function ewallet()
+    {
+        return $this->belongsTo(\App\Models\Ewalet::class, 'metode');
+    }
 }

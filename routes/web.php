@@ -37,6 +37,10 @@ Route::get('/syarat-ketentuan', function () {
     return view('pages.syarat-ketentuan');
 })->name('syarat-ketentuan');
 
+Route::get('/jual', function () {
+    return view('pages.jual');
+})->name('jual');
+
 Route::get('/riwayat-pembelian', [App\Http\Controllers\Auth\AdminOrderController::class, 'history'])->name('riwayat-pembelian');
 
 Route::post('/konfirmasi-pembayaran', [AdminOrderController::class, 'bayar'])->name('order.store');

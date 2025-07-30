@@ -14,46 +14,72 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        // Aggregate monthly total amounts from orders table
-        $monthlyPayments = Order::selectRaw('YEAR(tanggal) as year, MONTH(tanggal) as month, SUM(total) as total_amount')
+        $payments = Payment::all();
+        $games = Game::all();
+        $hargas = Harga::all();
+        $qrs = Qr::all();
+        $orders = Order::all();
+        $rates = Rate::all();
+        $ewalets = Ewalet::all();
+
+        // ➤ Agregasi jumlah order per bulan
+        $monthlyOrders = Order::selectRaw('YEAR(tanggal) as year, MONTH(tanggal) as month, COUNT(*) as total')
             ->groupBy('year', 'month')
             ->orderBy('year')
             ->orderBy('month')
             ->get();
 
-        // Prepare monthly labels as "YYYY-MM"
-        $monthlyLabels = $monthlyPayments->map(function ($item) {
+        $monthlyLabels = $monthlyOrders->map(function ($item) {
             return $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT);
-        })->toArray();
+        });
 
-        // Aggregate daily orders count for last 30 days using 'tanggal' column
-        $dailyOrders = Order::selectRaw('tanggal as date, COUNT(*) as count')
-            ->where('tanggal', '>=', now()->subDays(30)->toDateString())
+        $monthlyCounts = $monthlyOrders->pluck('total');
+
+        // ➤ Agregasi distribusi status
+        $statusCounts = Order::selectRaw('LOWER(TRIM(status)) as status, COUNT(*) as count')
+            ->groupBy('status')
+            ->get();
+
+        // ➤ Agregasi pembayaran per bulan (Monthly Payments)
+        $monthlyPayments = Order::selectRaw('YEAR(tanggal) as year, MONTH(tanggal) as month, SUM(total) as total')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+
+        $monthlyPaymentLabels = $monthlyPayments->map(function ($item) {
+            return $item->year . '-' . str_pad($item->month, 2, '0', STR_PAD_LEFT);
+        });
+
+        $monthlyPaymentTotals = $monthlyPayments->pluck('total');
+
+        // ➤ Agregasi jumlah order per hari (Daily Orders)
+        $dailyOrders = Order::selectRaw('tanggal as date, COUNT(*) as total')
             ->groupBy('date')
             ->orderBy('date')
             ->get();
 
-        // Aggregate order counts grouped by trimmed and lowercased status
-        $orderStatusCounts = Order::selectRaw('TRIM(LOWER(status)) as status, COUNT(*) as count')
-            ->groupBy('status')
-            ->get();
+        $dailyOrderLabels = $dailyOrders->pluck('date')->map(function ($date) {
+            return \Carbon\Carbon::parse($date)->format('Y-m-d');
+        });
 
-        $games = Game::all();
-        $hargas = Harga::all();
-        $qrs = Qr::all();
-        $rates = Rate::all();
-        $ewalets = Ewalet::all();
+        $dailyOrderCounts = $dailyOrders->pluck('total');
 
         return view('admin.dashboard', compact(
-            'monthlyPayments',
-            'monthlyLabels',
-            'dailyOrders',
-            'orderStatusCounts',
+            'payments',
             'games',
             'hargas',
             'qrs',
+            'orders',
             'rates',
-            'ewalets'
+            'ewalets',
+            'monthlyLabels',     // ← ini WAJIB ada
+            'monthlyCounts',     // ← ini juga WAJIB
+            'statusCounts',      // ← ini juga WAJIB
+            'monthlyPaymentLabels',
+            'monthlyPaymentTotals',
+            'dailyOrderLabels',
+            'dailyOrderCounts'
         ));
     }
 }

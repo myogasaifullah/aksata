@@ -44,19 +44,7 @@
             <!-- Search Section -->
             <div class="flex items-center space-x-4">
                 <!-- Enhanced Search Bar -->
-                <div class="relative hidden md:block">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <input 
-                        type="text" 
-                        name="q" 
-                        placeholder="Cari game..." 
-                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white focus:border-transparent text-sm transition-all duration-200 md:w-64 lg:w-80"
-                    >
-                </div>
+                
 
                 <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">

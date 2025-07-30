@@ -16,6 +16,7 @@ use App\Http\Controllers\auth\AdminDeskripsiController; // ← Tambahan
 use App\Http\Controllers\PublicRateController;
 use App\Models\Ewalet;
 use App\Models\Game;
+use App\Models\Order;
 use App\Models\Rate;
 use App\Models\Payment;
 use App\Models\Qr;
@@ -36,25 +37,43 @@ Route::get('/syarat-ketentuan', function () {
     return view('pages.syarat-ketentuan');
 })->name('syarat-ketentuan');
 
+Route::get('/jual', function () {
+    return view('pages.jual');
+})->name('jual');
+
 Route::get('/riwayat-pembelian', [App\Http\Controllers\Auth\AdminOrderController::class, 'history'])->name('riwayat-pembelian');
 
+Route::post('/konfirmasi-pembayaran', [AdminOrderController::class, 'bayar'])->name('order.store');
 
 Route::get('/register', fn() => 'Halaman Daftar')->name('register');
 
 // ✅ Menampilkan halaman detail game berdasarkan ID
-Route::get('/game/{id}', function ($id) {
-    $game = Game::findOrFail($id);
-    $payments = Payment::all();
-    $qrs = Qr::all();
-    $ewalets = Ewalet::all();
-    return view('pages.game-detail', compact('game', 'payments', 'qrs', 'ewalets'));
-})->name('game.show');
 
-// ✅ Konfirmasi Pembayaran
-Route::get('/konfirmasi-pembayaran', function () {
-    $qrs = Qr::all();
-    return view('pages.konfirmasi-pembayaran', compact('qrs'));
-})->name('konfirmasi-pembayaran');
+Route::get('/game/{id}', [AdminGameController::class, 'show'])->name('game.show');
+
+Route::get('/konfirmasi-pembayaran/{id?}', function ($id = null) {
+    $order = null;
+    $ewallet = null;
+    $payment = null;
+
+    if ($id) {
+        $order = \App\Models\Order::findOrFail($id);
+        $metode = strtolower($order->metode);
+
+        $ewallet = \App\Models\Ewalet::whereRaw('LOWER(nama) = ?', [$metode])->first();
+
+        if (!$ewallet) {
+            $payment = \App\Models\Payment::whereRaw('LOWER(method) = ?', [$metode])->first();
+        }
+    }
+
+    $qrs = \App\Models\Qr::all();
+
+    return view('pages.konfirmasi-pembayaran', compact('order', 'qrs', 'ewallet', 'payment'));
+})->name('konfirmasi.pembayaran'); // nama utama
+
+Route::get('/konfirmasi-pembayaran', fn () => redirect()->route('konfirmasi.pembayaran'))->name('konfirmasi-pembayaran');
+
 
 // ==============================
 // Autentikasi

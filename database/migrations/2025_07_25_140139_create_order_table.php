@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('metode');
             $table->integer('total');
             $table->string('status');
+            $table->string('game_id');
         });
     }
 

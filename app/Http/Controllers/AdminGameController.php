@@ -103,6 +103,10 @@ class AdminGameController extends Controller
     public function show($id)
     {
         $game = Game::findOrFail($id);
-        return view('pages.game-detail', compact('game'));
+        $hargas = \App\Models\Harga::where('game_id', $id)->get();
+        $payments = \App\Models\Payment::all();
+        $qrs = \App\Models\Qr::all();
+        $ewalets = \App\Models\Ewalet::all();
+        return view('pages.game-detail', compact('game', 'hargas', 'payments', 'qrs', 'ewalets'));
     }
 }

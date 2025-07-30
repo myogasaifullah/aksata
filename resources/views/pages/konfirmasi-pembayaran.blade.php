@@ -101,6 +101,10 @@
                 <span class="text-gray-600">Metode Pembayaran:</span>
                 <span class="font-medium text-blue-600">{{ $ewallet->nama }}</span>
             </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-gray-600">Nama Rekening:</span>
+                <span class="font-medium text-blue-600">{{ $ewallet->atasnama }}</span>
+            </div>
             
             <div class="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div class="flex justify-between">
@@ -123,6 +127,7 @@
                 <span class="text-gray-600">Metode Pembayaran:</span>
                 <span class="font-medium text-blue-600">{{ $payment->method }}</span>
             </div>
+            
             
             <div class="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div class="flex justify-between">
@@ -150,21 +155,41 @@
 
         @elseif ($qrs)
 
-        <div class="pt-2">
-            <p class="text-gray-600 mb-4">Silakan scan salah satu QR code berikut:</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        
+
+                <div class="pt-6 px-4">
+                <p class="text-gray-600 mb-6 text-center text-lg font-medium">Silakan scan salah satu QR code berikut:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($qrs as $item)
-                        <div class="border-2 border-dashed border-gray-200 rounded-lg p-4 flex justify-center">
-                            <img 
-                                src="{{ asset('storage/' . $item->gambar) }}" 
-                                alt="QR Code {{ $item->nama }}"
-                                class="w-56 h-56 object-contain"
-                                loading="lazy"
-                            >
+                        <div class="flex flex-col items-center transition-all duration-300 hover:scale-[1.02]">
+                            <!-- QR Code Container -->
+                            <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                                <!-- QR Code Image -->
+                                <div class="flex justify-center">
+                                    <img 
+                                        src="{{ asset('storage/' . $item->gambar) }}" 
+                                        alt="QR Code {{ $item->atasnama ?? 'QR' }}"
+                                        class="w-64 h-64 object-contain mx-auto"
+                                        loading="lazy"
+                                    >
+                                </div>
+                                
+                                <!-- Account Details -->
+                                <div class="mt-4 text-center bg-blue-50 rounded-lg p-3">
+                                    <div class="text-xs text-gray-500 font-medium">Nama Rekening</div>
+                                    <div class="font-semibold text-blue-700 text-lg mt-1">{{ $item->atasnama }}</div>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>
-        </div>
+            </div>
+
+
+
+
 
     @else
         <!-- Error State -->
@@ -180,8 +205,8 @@
             </p>
         </div>
     @endif
-</div>
-</div>
+    </div>
+    </div>
 
 
     <!-- Important Note -->

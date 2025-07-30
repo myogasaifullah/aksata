@@ -17,17 +17,29 @@ class AdminQrController extends Controller
 
     public function store(Request $request)
     {
-        $path = $request->file('gambar')->store('qr_images', 'public');
-        Qr::create(['gambar' => $path]);
+        $request->validate([
+            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'atasnama' => 'required|string|max:255',
+        ]);
 
-        return redirect()->back()->with('success', 'Gambar berhasil diupload.');
+        $path = $request->file('gambar')->store('qr_images', 'public');
+
+        Qr::create([
+            'gambar' => $path,
+            'atasnama' => $request->atasnama,
+        ]);
+
+        return redirect()->back()->with('success', 'QR berhasil diupload.');
     }
 
     public function update(Request $request, Qr $qr)
     {
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'atasnama' => 'required|string|max:255',
         ]);
+
+        $data = ['atasnama' => $request->atasnama];
 
         if ($request->hasFile('gambar')) {
             if (Storage::disk('public')->exists($qr->gambar)) {
@@ -35,10 +47,12 @@ class AdminQrController extends Controller
             }
 
             $path = $request->file('gambar')->store('qr_images', 'public');
-            $qr->update(['gambar' => $path]);
+            $data['gambar'] = $path;
         }
 
-        return redirect()->back()->with('success', 'Gambar berhasil diperbarui.');
+        $qr->update($data);
+
+        return redirect()->back()->with('success', 'QR berhasil diperbarui.');
     }
 
     public function destroy(Qr $qr)
@@ -49,6 +63,6 @@ class AdminQrController extends Controller
 
         $qr->delete();
 
-        return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
+        return redirect()->back()->with('success', 'QR berhasil dihapus.');
     }
 }

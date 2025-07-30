@@ -13,6 +13,7 @@ return new class extends Migration
     {
          Schema::create('qr', function (Blueprint $table) {
         $table->id();
+        $table->string('atasnama');
         $table->string('gambar'); // path gambar
         $table->timestamps();
     });

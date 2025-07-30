@@ -8,5 +8,5 @@ class Qr extends Model
 {
     protected $table = 'qr';
 
-    protected $fillable = ['gambar'];
+    protected $fillable = ['gambar','atasnama'];
 }

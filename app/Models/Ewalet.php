@@ -10,5 +10,5 @@ class Ewalet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'deskripsi', 'gambar'];
+    protected $fillable = ['nama', 'deskripsi', 'gambar','atasnama'];
 }

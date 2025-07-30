@@ -151,7 +151,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Metode</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bank</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor Rekening</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Atas Nama</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -200,7 +200,7 @@
                     <input type="file" name="image" id="image" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="method" class="form-label">Metode</label>
+                    <label for="method" class="form-label">Bank</label>
                     <input type="text" name="method" id="method" class="form-control" required>
                 </div>
                 <div class="mb-3">

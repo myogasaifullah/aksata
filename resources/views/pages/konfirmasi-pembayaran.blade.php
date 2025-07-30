@@ -129,6 +129,11 @@
                     <span class="text-gray-600">Nomor Rekening:</span>
                     <span class="font-mono font-medium">{{ $payment->account_number }}</span>
                 </div>
+
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Atas Nama:</span>
+                    <span class="font-mono font-medium">{{ $payment->atas_nama }}</span>
+                </div>
                 
                 @if($payment->account_name)
                 <div class="flex justify-between">
@@ -194,12 +199,12 @@
 
     <!-- Action Buttons -->
     <div class="flex flex-col sm:flex-row gap-3">
-        <a href="{{ url()->previous() }}" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium px-6 py-3 rounded-lg transition duration-300 ease-in-out flex items-center justify-center gap-2">
+<a href="{{ url()->previous() != url()->current() ? url()->previous() : route('beranda') }}" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium px-6 py-3 rounded-lg transition duration-300 ease-in-out flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
             </svg>
             Kembali
-        </a>
+        </a> 
         <a href="{{ route('riwayat-pembelian') }}" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-300 ease-in-out flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />

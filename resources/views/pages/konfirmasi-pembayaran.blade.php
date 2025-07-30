@@ -156,12 +156,17 @@
                 <div class="pt-6 px-4">
                 <p class="text-gray-600 mb-6 text-center text-lg font-medium">Silakan scan salah satu QR code berikut:</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 flex justify-center">
                     @foreach ($qrs as $item)
                         <div class="flex flex-col items-center transition-all duration-300 hover:scale-[1.02]">
                             <!-- QR Code Container -->
                             <div class="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-                                <!-- QR Code Image -->
+                            <!-- Account Details -->
+                                <div class="mt-4 text-center bg-blue-50 rounded-lg p-3">
+                                    <div class="text-xs text-gray-500 font-medium">Nama Rekening</div>
+                                    <div class="font-semibold text-blue-700 text-lg mt-1">{{ $item->atasnama }}</div>
+                                </div>    
+                            <!-- QR Code Image -->
                                 <div class="flex justify-center">
                                     <img 
                                         src="{{ asset('storage/' . $item->gambar) }}" 
@@ -171,11 +176,7 @@
                                     >
                                 </div>
                                 
-                                <!-- Account Details -->
-                                <div class="mt-4 text-center bg-blue-50 rounded-lg p-3">
-                                    <div class="text-xs text-gray-500 font-medium">Nama Rekening</div>
-                                    <div class="font-semibold text-blue-700 text-lg mt-1">{{ $item->atasnama }}</div>
-                                </div>
+                                
                             </div>
                         </div>
                     @endforeach

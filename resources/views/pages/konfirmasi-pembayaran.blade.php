@@ -85,20 +85,77 @@
             Metode Pembayaran
         </h2>
     </div>
-    <div class="p-6 space-y-4">
-        @if ($ewallet)
-            <div class="text-gray-600">Metode: <strong>{{ $ewallet->nama }}</strong></div>
-            <div class="text-gray-600">Silakan scan QR berikut:</div>
-            <img src="{{ asset('storage/' . $ewallet->gambar) }}" alt="QR Code" class="w-48 h-48 object-contain">
-        @elseif ($payment)
-            <div class="text-gray-600">Metode: <strong>{{ $payment->method }}</strong></div>
-            <div class="text-gray-600">Silakan transfer ke rekening berikut:</div>
-            <img src="{{ asset('storage/' . $payment->image) }}" alt="Bukti Transfer" class="w-64 mb-2">
-            <p>No. Rekening: <strong>{{ $payment->account_number }}</strong></p>
-        @else
-            <p class="text-red-500">Metode pembayaran <strong>{{ $order->metode }}</strong> tidak ditemukan.</p>
-        @endif
-    </div>
+    <div class="bg-white rounded-lg shadow-md p-6 space-y-6">
+    @if ($ewallet)
+        <!-- E-wallet Payment Section -->
+        <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-800">Pembayaran E-Wallet</h3>
+            
+            <div class="flex items-center space-x-3">
+                <span class="text-gray-600">Metode Pembayaran:</span>
+                <span class="font-medium text-blue-600">{{ $ewallet->nama }}</span>
+            </div>
+            
+            <div class="pt-2">
+                <p class="text-gray-600 mb-4">Silakan scan QR code berikut untuk melakukan pembayaran:</p>
+                <div class="border-2 border-dashed border-gray-200 rounded-lg p-4 flex justify-center">
+                    <img 
+                        src="{{ asset('storage/' . $ewallet->gambar) }}" 
+                        alt="QR Code {{ $ewallet->nama }}" 
+                        class="w-56 h-56 object-contain"
+                        loading="lazy"
+                    >
+                </div>
+                <p class="text-sm text-gray-500 mt-2 text-center">
+                    Pembayaran akan diproses otomatis setelah transfer berhasil
+                </p>
+            </div>
+        </div>
+
+    @elseif ($payment)
+        <!-- Bank Transfer Section -->
+        <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-800">Transfer Bank</h3>
+            
+            <div class="flex items-center space-x-3">
+                <span class="text-gray-600">Metode Pembayaran:</span>
+                <span class="font-medium text-blue-600">{{ $payment->method }}</span>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Nomor Rekening:</span>
+                    <span class="font-mono font-medium">{{ $payment->account_number }}</span>
+                </div>
+                
+                @if($payment->account_name)
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Atas Nama:</span>
+                    <span class="font-medium">{{ $payment->account_name }}</span>
+                </div>
+                @endif
+            </div>
+            
+            <p class="text-sm text-gray-500">
+                Silakan transfer sesuai dengan total pembayaran Anda. Pembayaran akan diverifikasi secara manual.
+            </p>
+        </div>
+
+    @else
+        <!-- Error State -->
+        <div class="bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
+            <div class="flex items-center space-x-2">
+                <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <h3 class="text-red-800 font-medium">Metode Pembayaran Tidak Ditemukan</h3>
+            </div>
+            <p class="mt-2 text-red-600">
+                Metode pembayaran <strong>{{ $order->metode }}</strong> tidak tersedia. Silakan hubungi customer service.
+            </p>
+        </div>
+    @endif
+</div>
 </div>
 
 

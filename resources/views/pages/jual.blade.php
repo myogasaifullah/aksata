@@ -18,12 +18,6 @@
             </h1>
             
             <p class="text-xl text-white/80 mb-6">Kami membeli chip game Anda dengan harga terbaik!</p>
-            
-            <!-- Status Badge -->
-            <div class="inline-flex items-center gap-2 bg-green-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-green-400/30">
-                <span class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
-                <span class="text-green-100 font-medium">🟢 Sedang Membeli Chip</span>
-            </div>
         </div>
     </div>
 
@@ -40,19 +34,17 @@
                             <span class="text-lg">🏆</span>
                         </div>
                         <div>
-                            <div class="font-bold">Mobile Legends</div>
-                            <div class="text-xs opacity-80">Bang Bang</div>
+                            <div class="font-bold">Higgs Dimino</div>
                         </div>
                     </div>
                 </button>
                 <button class="game-tab flex-1 px-6 py-4 text-center font-medium transition-all duration-300 bg-gray-100 text-gray-600 hover:bg-gray-200" data-game="game2">
                     <div class="flex items-center justify-center gap-3">
                         <div class="w-8 h-8 bg-gray-300 rounded-lg flex items-center justify-center">
-                            <span class="text-lg">🔫</span>
+                            <span class="text-lg">🪙</span>
                         </div>
                         <div>
-                            <div class="font-bold">Free Fire</div>
-                            <div class="text-xs opacity-80">Battlegrounds</div>
+                            <div class="font-bold">Royal Dream</div>
                         </div>
                     </div>
                 </button>
@@ -68,11 +60,9 @@
                             🏆
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900">Mobile Legends: Bang Bang</h2>
-                            <p class="text-gray-600">Diamonds & Battle Points</p>
+                            <h2 class="text-2xl font-bold text-gray-900">Higgs Dimino</h2>
                             <div class="flex gap-2 mt-2">
-                                <span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">💎 Diamonds</span>
-                                <span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium">⚡ Battle Points</span>
+                                <span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full font-medium">🪙 Chip</span>
                             </div>
                         </div>
                         <div class="ml-auto text-right">
@@ -87,16 +77,15 @@
                         <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-purple-50 rounded-xl transition-colors border hover:border-purple-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
+                                    <span class="text-white font-bold">🪙</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">100 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Mobile Legends</p>
+                                    <h4 class="font-semibold text-gray-900">500 M</h4>
+                                    <p class="text-sm text-gray-500">Higgs Dimino</p>
                                 </div>
                             </div>
                             <div class="text-right">
                                 <div class="text-lg font-bold text-green-600">Rp 15.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
                             </div>
                         </div>
 
@@ -104,16 +93,15 @@
                         <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-purple-50 rounded-xl transition-colors border hover:border-purple-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
+                                    <span class="text-white font-bold">🪙</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">250 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Mobile Legends</p>
+                                    <h4 class="font-semibold text-gray-900">1B - 5B</h4>
+                                    <p class="text-sm text-gray-500">Higgs Dimino</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 35.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
+                                <div class="text-lg font-bold text-green-600">Rp 37.000</div>
                             </div>
                         </div>
 
@@ -121,67 +109,15 @@
                         <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-purple-50 rounded-xl transition-colors border hover:border-purple-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
+                                    <span class="text-white font-bold">🪙</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">500 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Mobile Legends</p>
+                                    <h4 class="font-semibold text-gray-900">6B++</h4>
+                                    <p class="text-sm text-gray-500">Higgs Dimino</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 70.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
-                            </div>
-                        </div>
-
-                        <!-- ML Item 4 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-purple-50 rounded-xl transition-colors border hover:border-purple-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-900">1000 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Mobile Legends</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 140.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
-                            </div>
-                        </div>
-
-                        <!-- ML Item 5 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-purple-50 rounded-xl transition-colors border hover:border-purple-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">⚡</span>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-900">10,000 Battle Points</h4>
-                                    <p class="text-sm text-gray-500">Mobile Legends</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 8.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
-                            </div>
-                        </div>
-
-                        <!-- ML Item 6 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-purple-50 rounded-xl transition-colors border hover:border-purple-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">⚡</span>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-900">50,000 Battle Points</h4>
-                                    <p class="text-sm text-gray-500">Mobile Legends</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 35.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
+                                <div class="text-lg font-bold text-green-600">Rp 38.000</div>
                             </div>
                         </div>
                     </div>
@@ -192,14 +128,12 @@
                     <!-- Game Info Header -->
                     <div class="flex items-center gap-4 mb-6 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-xl">
                         <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center text-2xl">
-                            🔫
+                            🪙
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-900">Free Fire: Battlegrounds</h2>
-                            <p class="text-gray-600">Diamonds & Gold</p>
+                            <h2 class="text-2xl font-bold text-gray-900">Royal Dream</h2>
                             <div class="flex gap-2 mt-2">
-                                <span class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-medium">💎 Diamonds</span>
-                                <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">🪙 Gold</span>
+                                <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full font-medium">🪙 Chip</span>
                             </div>
                         </div>
                         <div class="ml-auto text-right">
@@ -214,16 +148,15 @@
                         <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors border hover:border-orange-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
+                                    <span class="text-white font-bold">🪙</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">100 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Free Fire</p>
+                                    <h4 class="font-semibold text-gray-900">500 M</h4>
+                                    <p class="text-sm text-gray-500">Royal Dream</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 12.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
+                                <div class="text-lg font-bold text-green-600">Rp 28.000</div>
                             </div>
                         </div>
 
@@ -231,16 +164,15 @@
                         <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors border hover:border-orange-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
+                                    <span class="text-white font-bold">🪙</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">310 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Free Fire</p>
+                                    <h4 class="font-semibold text-gray-900">1B - 5B</h4>
+                                    <p class="text-sm text-gray-500">Royal Dream</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 35.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
+                                <div class="text-lg font-bold text-green-600">Rp 58.000</div>
                             </div>
                         </div>
 
@@ -248,67 +180,15 @@
                         <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors border hover:border-orange-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
+                                    <span class="text-white font-bold">🪙</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-900">520 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Free Fire</p>
+                                    <h4 class="font-semibold text-gray-900">6B ++</h4>
+                                    <p class="text-sm text-gray-500">Royal Dream</p>
                                 </div>
                             </div>
                             <div class="text-right">
                                 <div class="text-lg font-bold text-green-600">Rp 60.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
-                            </div>
-                        </div>
-
-                        <!-- FF Item 4 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors border hover:border-orange-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">💎</span>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-900">1060 Diamonds</h4>
-                                    <p class="text-sm text-gray-500">Free Fire</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 120.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
-                            </div>
-                        </div>
-
-                        <!-- FF Item 5 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors border hover:border-orange-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">🪙</span>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-900">50,000 Gold</h4>
-                                    <p class="text-sm text-gray-500">Free Fire</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 5.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
-                            </div>
-                        </div>
-
-                        <!-- FF Item 6 -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 hover:bg-orange-50 rounded-xl transition-colors border hover:border-orange-200">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold">🪙</span>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-900">200,000 Gold</h4>
-                                    <p class="text-sm text-gray-500">Free Fire</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-green-600">Rp 18.000</div>
-                                <div class="text-xs text-gray-500">Kami Beli</div>
                             </div>
                         </div>
                     </div>
@@ -325,8 +205,8 @@
                 </div>
                 
                 <!-- Main Text -->
-                <h2 class="text-3xl font-bold mb-4">Mau Jual <span id="selected-game-name">Mobile Legends</span> Anda?</h2>
-                <p class="text-xl text-green-100 mb-2">Jika Anda memiliki <span id="selected-game-currency">diamonds/battle points</span> dan ingin menjualnya kepada kami,</p>
+                <h2 class="text-3xl font-bold mb-4">Mau Jual <span id="selected-game-name">Chip</span> Anda?</h2>
+                <p class="text-xl text-green-100 mb-2">Jika Anda memiliki <span id="selected-game-currency">chip</span> dan ingin menjualnya kepada kami,</p>
                 <p class="text-lg text-green-200 mb-8">silahkan hubungi kami melalui WhatsApp untuk proses yang cepat dan mudah!</p>
                 
                 <!-- Features -->
@@ -349,7 +229,7 @@
                 </div>
                 
                 <!-- Dynamic WhatsApp Button -->
-                <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20menjual%20diamonds%20Mobile%20Legends%20saya" 
+                <a href="https://wa.me/6282276993219?text=Halo,%20saya%20ingin%20menjual%20diamonds%20Mobile%20Legends%20saya" 
                    id="whatsapp-link"
                    target="_blank" 
                    class="inline-flex items-center gap-3 bg-white text-green-600 font-bold py-4 px-8 rounded-2xl hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">

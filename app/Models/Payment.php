@@ -13,5 +13,6 @@ class Payment extends Model
         'image',
         'method',
         'account_number',
+        'atas_nama',
     ];
 }

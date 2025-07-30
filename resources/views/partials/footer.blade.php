@@ -31,9 +31,9 @@
             <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-purple-200">Navigasi</h3>
             <ul class="space-y-3">
                 <li>
-                    <a href="{{ route('beranda') }}" class="flex items-center text-gray-700 hover:text-purple-600 transition-colors duration-200 group">
+                    <a href="{{ route('jual') }}" class="flex items-center text-gray-700 hover:text-purple-600 transition-colors duration-200 group">
                         <span class="w-1 h-1 bg-purple-600 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                        Search Game
+                        Jual Chip
                     </a>
                 </li>
                 <li>

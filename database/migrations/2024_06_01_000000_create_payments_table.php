@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->string('image');
             $table->string('method');
             $table->string('account_number');
+            $table->string('atas_nama');
             $table->timestamps();
         });
     }

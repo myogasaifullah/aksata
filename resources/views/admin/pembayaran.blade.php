@@ -153,6 +153,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Metode</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor Rekening</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Atas Nama</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
@@ -164,6 +165,7 @@
                                     </td>
                                     <td class="py-2 px-4 border-b">{{ $payment->method }}</td>
                                     <td class="py-2 px-4 border-b">{{ $payment->account_number }}</td>
+                                    <td class="py-2 px-4 border-b">{{ $payment->atas_nama }}</td>
                                     <td class="py-2 px-4 border-b">
                                         <button type="button" class="btn btn-link text-dark px-3 mb-0 editPaymentBtn" data-id="{{ $payment->id }}" data-bs-toggle="modal" data-bs-target="#editPaymentModal">
                                             <i class="material-icons text-sm me-2">edit</i>Edit
@@ -205,6 +207,10 @@
                     <label for="account_number" class="form-label">Nomor Rekening</label>
                     <input type="text" name="account_number" id="account_number" class="form-control" required>
                 </div>
+                <div class="mb-3">
+                    <label for="atas_nama" class="form-label">Atas Nama</label>
+                    <input type="text" name="atas_nama" id="atas_nama" class="form-control" required>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -237,6 +243,10 @@
                     <div class="mb-3">
                         <label for="editAccountNumber" class="form-label">Nomor Rekening</label>
                         <input type="text" name="account_number" id="editAccountNumber" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAtasNama" class="form-label">Atas Nama</label>
+                        <input type="text" name="atas_nama" id="editAtasNama" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -286,21 +296,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
     // Handle Edit button click
-    document.querySelectorAll('.editPaymentBtn').forEach(button => {
-        button.addEventListener('click', function() {
-            const paymentId = this.getAttribute('data-id');
-            fetch(`/pembayaran/${paymentId}/edit`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('editPaymentId').value = data.id;
-                    document.getElementById('editMethod').value = data.method;
-                    document.getElementById('editAccountNumber').value = data.account_number;
-                    document.getElementById('editImage').value = '';
-                    document.getElementById('editPaymentForm').action = `/pembayaran/${data.id}`;
-                    new bootstrap.Modal(editPaymentModal).show();
-                });
-        });
-    });
+                    document.querySelectorAll('.editPaymentBtn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const paymentId = this.getAttribute('data-id');
+                            fetch(`/pembayaran/${paymentId}/edit`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    document.getElementById('editPaymentId').value = data.id;
+                                    document.getElementById('editMethod').value = data.method;
+                                    document.getElementById('editAccountNumber').value = data.account_number;
+                                    document.getElementById('editAtasNama').value = data.atas_nama;
+                                    document.getElementById('editImage').value = '';
+                                    document.getElementById('editPaymentForm').action = `/pembayaran/${data.id}`;
+                                    new bootstrap.Modal(editPaymentModal).show();
+                                });
+                        });
+                    });
 
      // Handle Delete button click
     document.querySelectorAll('.deletePaymentBtn').forEach(button => {

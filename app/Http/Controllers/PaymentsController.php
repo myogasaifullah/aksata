@@ -20,6 +20,7 @@ class PaymentsController extends Controller
             'image' => 'required|image|max:2048',
             'method' => 'required|string|max:255',
             'account_number' => 'required|string|max:255',
+            'atas_nama' => 'required|string|max:255',
         ]);
 
         $imagePath = $request->file('image')->store('payments', 'public');
@@ -28,6 +29,7 @@ class PaymentsController extends Controller
             'image' => $imagePath,
             'method' => $request->method,
             'account_number' => $request->account_number,
+            'atas_nama' => $request->atas_nama,
         ]);
 
         return redirect()->route('admin.pembayaran.index')->with('success', 'Payment created successfully.');
@@ -45,6 +47,7 @@ class PaymentsController extends Controller
             'image' => 'nullable|image|max:2048',
             'method' => 'required|string|max:255',
             'account_number' => 'required|string|max:255',
+            'atas_nama' => 'required|string|max:255',
         ]);
 
         $payment = Payment::findOrFail($id);
@@ -59,6 +62,7 @@ class PaymentsController extends Controller
 
         $payment->method = $request->method;
         $payment->account_number = $request->account_number;
+        $payment->atas_nama = $request->atas_nama;
         $payment->save();
 
         return redirect()->route('admin.pembayaran.index')->with('success', 'Payment updated successfully.');

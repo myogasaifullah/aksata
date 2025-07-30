@@ -88,7 +88,9 @@ Route::post('logout', function () {
 // Dashboard & Admin Area
 // ==============================
 
-Route::get('/dashboard', fn() => view('admin/dashboard'))
+use App\Http\Controllers\AdminDashboardController;
+
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

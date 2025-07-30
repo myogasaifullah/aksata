@@ -324,28 +324,20 @@
 
 
         <!-- Tombol Submit -->
-        <div class="mt-6 text-right">
-            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-lg shadow">
-                Lanjutkan
-            </button>
+       
         </div>
+<div class="mt-8 text-center animate-fade-in">
+    <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-10 py-3 rounded-lg shadow transition duration-300 ease-in-out inline-block">
+        Lanjutkan ke Pembayaran
+                </button>
+</div>
+
+</div>
+
         </form>
-
-
-        <!-- Step 4: Payment Selection with Consistent Borders -->
-
-
     </div>
 </div>
-</div>
-<!-- Tombol Lanjutkan ke Pembayaran sebagai link -->
-<div class="mt-8 text-center animate-fade-in">
-    <a href="{{ route('konfirmasi-pembayaran') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-10 py-3 rounded-lg shadow transition duration-300 ease-in-out inline-block">
-        Lanjutkan ke Pembayaran
-    </a>
-</div>
 
-</div>
 @endsection
 
 <script>

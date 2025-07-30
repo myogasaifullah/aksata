@@ -56,7 +56,11 @@
         <div class="p-6">
             <div class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <div class="text-gray-600">User ID</div>
+                    <div class="text-gray-600">ID Transaksi</div>
+                    <div class="font-medium text-gray-900">{{ $order->id_transaksi }}</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-gray-600">User ID Game</div>
                     <div class="font-medium text-gray-900">{{ $order->game_id }}</div>
                 </div>
                 <div class="flex justify-between items-center">
@@ -86,7 +90,9 @@
         </h2>
     </div>
     <div class="bg-white rounded-lg shadow-md p-6 space-y-6">
+
     @if ($ewallet)
+
         <!-- E-wallet Payment Section -->
         <div class="space-y-4">
             <h3 class="text-lg font-semibold text-gray-800">Pembayaran E-Wallet</h3>
@@ -96,16 +102,12 @@
                 <span class="font-medium text-blue-600">{{ $ewallet->nama }}</span>
             </div>
             
-            <div class="pt-2">
-                <p class="text-gray-600 mb-4">Silakan scan QR code berikut untuk melakukan pembayaran:</p>
-                <div class="border-2 border-dashed border-gray-200 rounded-lg p-4 flex justify-center">
-                    <img 
-                        src="{{ asset('storage/' . $ewallet->gambar) }}" 
-                        alt="QR Code {{ $ewallet->nama }}" 
-                        class="w-56 h-56 object-contain"
-                        loading="lazy"
-                    >
+            <div class="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Nomor Ewaller:</span>
+                    <span class="font-mono font-medium">{{ $ewallet->deskripsi }}</span>
                 </div>
+            
                 <p class="text-sm text-gray-500 mt-2 text-center">
                     Pembayaran akan diproses otomatis setelah transfer berhasil
                 </p>
@@ -139,6 +141,24 @@
             <p class="text-sm text-gray-500">
                 Silakan transfer sesuai dengan total pembayaran Anda. Pembayaran akan diverifikasi secara manual.
             </p>
+        </div>
+
+        @elseif ($qrs)
+
+        <div class="pt-2">
+            <p class="text-gray-600 mb-4">Silakan scan salah satu QR code berikut:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach ($qrs as $item)
+                        <div class="border-2 border-dashed border-gray-200 rounded-lg p-4 flex justify-center">
+                            <img 
+                                src="{{ asset('storage/' . $item->gambar) }}" 
+                                alt="QR Code {{ $item->nama }}"
+                                class="w-56 h-56 object-contain"
+                                loading="lazy"
+                            >
+                        </div>
+                    @endforeach
+                </div>
         </div>
 
     @else

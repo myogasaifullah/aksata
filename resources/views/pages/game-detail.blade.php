@@ -61,84 +61,9 @@
 
 
     <!-- Deskripsi Game - Improved Version -->
-<div class="mt-10 bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100">
-    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        Top Up Royal Play Domino Chip Murah
-    </h2>
-    <div class="text-gray-700 leading-relaxed space-y-3 text-justify">
-        <p>{{ $game->deskripsi }}</p>
-        <div class="bg-purple-50 border-l-4 border-purple-500 p-3 rounded-r">
-            <p class="font-medium text-purple-800">Cara Bermain:</p>
-            
-            <p>{{ $game->cara_bermain }}</p>
-        
-</div>
-<!-- Header with Progress Steps -->
-<div class="mb-10 mt-10 text-center">
-        <div class="flex justify-center mb-6">
-            <div class="flex items-center">
-                <!-- Step 1 -->
-                <div class="flex flex-col items-center">
-                    <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold mb-2">
-                        1
-                    </div>
-                    <span class="text-xs text-gray-600">Pemesanan</span>
-                </div>
-                
-                <!-- Connector -->
-                <div class="w-16 h-1 bg-purple-200 mx-2"></div>
-                
-                <!-- Step 2 -->
-                <div class="flex flex-col items-center">
-                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold mb-2">
-                        2
-                    </div>
-                    <span class="text-xs text-gray-600">Pembayaran</span>
-                </div>
-                
-                <!-- Connector -->
-                <div class="w-16 h-1 bg-purple-200 mx-2"></div>
-                
-                <!-- Step 3 -->
-                <div class="flex flex-col items-center">
-                    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold mb-2">
-                        3
-                    </div>
-                    <span class="text-xs text-gray-600">Selesai</span>
-                </div>
-            </div>
-        </div>
-        
-        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Pemesanan</h1>
-        <p class="text-gray-600">Pastikan semua data sudah benar sebelum melanjutkan pembayaran</p>
-    </div>
-
-    <!-- Improved Input Sections -->
-    @php
-    $steps = [
-        ['1', 'Cari Akun Anda', 'Masukkan User ID (Bukan Higgs)', '?'],
-        ['2', 'Cara Menghubungi Anda', 'Masukan Nomor Telp', '']
-    ];
-@endphp
-@foreach ($steps as [$num, $title, $placeholder, $hint])
-<div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-100 hover:border-purple-200 transition-all duration-200">
-    <div class="flex items-center mb-4">
-        <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">{{ $num }}</div>
-        <h3 class="text-lg font-semibold text-gray-800">{{ $title }}</h3>
-    </div>
-    <div class="relative">
-        <input type="text" placeholder="{{ $placeholder }}" 
-               class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-300 transition pl-10 bg-gray-50"/>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-    </div>
-    @if($hint)
-        <div class="flex items-center mt-3 text-sm text-gray-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="mt-10 bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-gray-100">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Top Up Royal Play Domino Chip Murah
@@ -393,6 +318,31 @@
                         </button>
                         @endforeach
                     </div>
+
+                    <div x-show="openPayment === 'ewallet'" x-collapse class="bg-white border-t border-gray-200">
+    @foreach ($ewalets as $ewalet)
+    <button type="button" 
+        @click="selectedPayment = { type: 'ewallet', method: '{{ $ewalet->nama }}', value: '{{ $ewalet->id }}' }"
+        class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
+        :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}' }">
+        
+        <div class="flex items-center gap-4">
+            <img src="{{ asset('storage/' . $ewalet->gambar) }}" alt="{{ $ewalet->nama }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+            <span class="font-medium text-gray-800">{{ $ewalet->nama }}</span>
+        </div>
+        
+        <div class="flex items-center gap-2">
+            <div x-show="selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}'" 
+                class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+    </button>
+    @endforeach
+</div>
+
                 </div>
             </div>
         </div>

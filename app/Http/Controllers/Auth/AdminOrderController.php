@@ -17,21 +17,21 @@ class AdminOrderController extends Controller
         return view('admin.order', compact('orders', 'games'));
     }
 
-    public function history(Request $request)
+   public function history(Request $request)
 {
-    $query = Order::query();
+    $orders = collect(); // Kosongkan defaultnya
+    $search = $request->game_id;
 
-    if ($request->filled('id_transaksi')) {
-        $query->where('id_transaksi', $request->id_transaksi);
+    if ($request->filled('game_id')) {
+        $orders = Order::where('game_id', 'like', '%' . $search . '%')->get();
     }
-
-    $orders = $query->get();
 
     return view('pages.riwayat-pembelian', [
         'orders' => $orders,
-        'search' => $request->id_transaksi,
+        'search' => $search,
     ]);
 }
+
 
 
     public function store(Request $request) {
@@ -74,23 +74,19 @@ public function show($id)
 {
     $order = Order::findOrFail($id);
 
-    // Ambil nama metode dari order
     $metode = strtolower($order->metode);
-
-    // Coba cari di ewallet
     $ewallet = Ewalet::whereRaw('LOWER(nama) = ?', [$metode])->first();
 
-    // Jika tidak ditemukan di ewallet, cari di payment
     $payment = null;
     if (!$ewallet) {
         $payment = Payment::whereRaw('LOWER(method) = ?', [$metode])->first();
     }
 
-    // QR khusus qris (jika kamu butuh)
     $qrs = Ewalet::where('nama', 'qris')->get();
 
     return view('pembayaran.show', compact('order', 'ewallet', 'payment', 'qrs'));
 }
+
 
 
     public function update(Request $request, $id) {

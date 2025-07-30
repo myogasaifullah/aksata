@@ -150,11 +150,6 @@
                     <!-- Loop through grouped harga data with more space between each table -->
                     @foreach ($hargasGrouped as $gameName => $hargasByGame)
                     <div class="card my-5"> <!-- Increased my-5 here for more margin-top and margin-bottom for each table -->
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">{{ $gameName }}</h6> <!-- Menampilkan nama game -->
-                            </div>
-                        </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">

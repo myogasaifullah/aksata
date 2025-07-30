@@ -151,7 +151,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bank</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Bank</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor Rekening</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Atas Nama</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -160,9 +160,7 @@
                             <tbody>
                                 @foreach ($payments as $payment)
                                 <tr>
-                                    <td class="py-2 px-4 border-b">
-                                        <img src="{{ asset('storage/' . $payment->image) }}" alt="Payment Image" class="h-16 w-16 object-cover">
-                                    </td>
+                                    <td><img src="{{ asset('storage/' . $payment->image) }}" width="50"></td>
                                     <td class="py-2 px-4 border-b">{{ $payment->method }}</td>
                                     <td class="py-2 px-4 border-b">{{ $payment->account_number }}</td>
                                     <td class="py-2 px-4 border-b">{{ $payment->atas_nama }}</td>

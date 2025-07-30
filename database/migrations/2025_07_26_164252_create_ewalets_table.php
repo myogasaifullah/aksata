@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('ewalets', function (Blueprint $table) {
         $table->id();
         $table->string('nama');
+        $table->string('atasnama');
         $table->text('deskripsi');
         $table->string('gambar'); // path gambar
         $table->timestamps();

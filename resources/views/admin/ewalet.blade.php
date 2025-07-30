@@ -31,6 +31,7 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">atasnama</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deskripsi</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                 </tr>
@@ -40,6 +41,7 @@
                 <tr>
                   <td><img src="{{ asset('storage/' . $ewalet->gambar) }}" width="50"></td>
                   <td>{{ $ewalet->nama }}</td>
+                  <td>{{ $ewalet->atasnama }}</td>
                   <td>{{ $ewalet->deskripsi }}</td>
                   <td class="text-center">
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $ewalet->id }}">Edit</button>
@@ -64,6 +66,10 @@
                           <div class="mb-3">
                             <label>Nama</label>
                             <input type="text" name="nama" value="{{ $ewalet->nama }}" class="form-control" required>
+                          </div>
+                          <div class="mb-3">
+                            <label>atasnama</label>
+                            <input type="text" name="atasnama" value="{{ $ewalet->atasnama }}" class="form-control" required>
                           </div>
                           <div class="mb-3">
                             <label>Deskripsi</label>
@@ -104,6 +110,10 @@
           <div class="mb-3">
             <label>Nama</label>
             <input type="text" name="nama" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>atasnama</label>
+            <input type="text" name="atasnama" class="form-control" required>
           </div>
           <div class="mb-3">
             <label>Deskripsi</label>

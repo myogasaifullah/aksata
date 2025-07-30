@@ -18,6 +18,7 @@ class AdminEwaletController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
+            'atasnama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -26,6 +27,7 @@ class AdminEwaletController extends Controller
 
         Ewalet::create([
             'nama' => $request->nama,
+            'atasnama' => $request->atasnama,
             'deskripsi' => $request->deskripsi,
             'gambar' => $path,
         ]);
@@ -37,6 +39,7 @@ class AdminEwaletController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
+            'atasnama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);

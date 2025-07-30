@@ -4,7 +4,7 @@
     <div class="max-w-6xl mx-auto py-8 px-4">
         <!-- Header Section -->
         <div class="mb-6">
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Cari Game  ID</h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Cari Riwayat Pembelian Anda</h1>
             <p class="text-gray-600 mt-1">Masukkan Game ID untuk melihat detail pembelian Anda</p>
         </div>
 
@@ -14,7 +14,7 @@
                 <input
                     type="text"
                     name="game_id"
-                    placeholder="Cari berdasarkan Game ID"
+                    placeholder="Masukkan ID Game Anda"
                     value="{{ old('game_id', $search) }}"
                     class="w-full sm:w-1/3 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-purple-500 focus:border-purple-500"
                 >

@@ -74,7 +74,6 @@ Route::get('/konfirmasi-pembayaran/{id?}', function ($id = null) {
 
 Route::get('/konfirmasi-pembayaran', fn () => redirect()->route('konfirmasi.pembayaran'))->name('konfirmasi-pembayaran');
 
-
 // ==============================
 // Autentikasi
 // ==============================
@@ -137,6 +136,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders', [AdminOrderController::class, 'store'])->name('admin.orders.store');
     Route::put('/orders/{id}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
     Route::delete('/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
+
+    // Tambahkan Route untuk Verifikasi Order
+    Route::put('/admin/orders/{order}/verify', [AdminOrderController::class, 'verify'])->name('admin.orders.verify');
 
     // Rate
     Route::get('/rate', [AdminRateController::class, 'index'])->name('admin.rate.index');

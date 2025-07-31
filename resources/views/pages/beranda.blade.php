@@ -83,7 +83,7 @@
             <!-- Slide 3 - Bonus Promo -->
             <div class="slide w-1/4 h-full relative flex-shrink-0">
                 <div class="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-indigo-900/80 z-10"></div>
-                <img src="{{ asset('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGdhbWluZ3xlbnwwfHwwfHx8MA%3D%3D') }}" alt="Game Collection" class="w-full h-full object-cover">
+                <img src="{{ asset('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FtaW5nfGVufDB8fDB8fHww') }}" alt="Game Collection" class="w-full h-full object-cover">
                 
                 <!-- Floating Particles -->
                 <div class="absolute inset-0 z-5 opacity-30">
@@ -119,7 +119,7 @@
             <!-- Slide 4 - Bonus Promo -->
             <div class="slide w-1/4 h-full relative flex-shrink-0">
                 <div class="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-indigo-900/80 z-10"></div>
-                <img src="{{ asset('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGdhbWluZ3xlbnwwfHwwfHx8MA%3D%3D') }}" alt="Game Collection" class="w-full h-full object-cover">
+                <img src="{{ asset('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FtaW5nfGVufDB8fDB8fHww') }}" alt="Game Collection" class="w-full h-full object-cover">
                 
                 <!-- Floating Particles -->
                 <div class="absolute inset-0 z-5 opacity-30">

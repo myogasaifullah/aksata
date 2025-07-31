@@ -85,6 +85,12 @@
                 Game
             </a>
 
+            <a href="{{ route('jual') }}"
+               class="block px-3 py-2 rounded-md text-base font-medium
+               {{ request()->routeIs('jual') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50' }}">
+                Jual Chip
+            </a>
+
             <a href="{{ route('syarat-ketentuan') }}"
                class="block px-3 py-2 rounded-md text-base font-medium
                {{ request()->routeIs('syarat-ketentuan') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50' }}">

@@ -89,6 +89,7 @@ Route::post('logout', function () {
 // ==============================
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Auth\AdminJualController;
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -132,6 +133,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pembayaran/{id}/edit', [PaymentsController::class, 'edit'])->name('admin.pembayaran.edit');
     Route::put('/pembayaran/{id}', [PaymentsController::class, 'update'])->name('admin.pembayaran.update');
     Route::delete('/pembayaran/{id}', [PaymentsController::class, 'destroy'])->name('admin.pembayaran.destroy');
+
+    // Route admin jual
+    Route::get('/jual-admin', [AdminJualController::class, 'index'])->name('admin.jual.index');
+    Route::post('/jual-admin', [AdminJualController::class, 'store'])->name('admin.jual.store');
+    Route::put('/jual-admin/{jual}', [AdminJualController::class, 'update'])->name('admin.jual.update');
+    Route::delete('/jual-admin/{jual}', [AdminJualController::class, 'destroy'])->name('admin.jual.destroy');
 
     // Order
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');

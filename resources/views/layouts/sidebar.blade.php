@@ -99,7 +99,14 @@
                     <span class="nav-link-text ms-1">Ewalet</span>
                 </a>
             </li>
-
+<li class="nav-item">
+    <a class="nav-link text-white {{ Request::routeIs('admin.jual.index') ? 'active bg-gradient-primary' : '' }}" href="{{ route('admin.jual.index') }}">
+        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">shopping_cart</i> {{-- ikon cart cocok untuk jual --}}
+        </div>
+        <span class="nav-link-text ms-1">Jual</span>
+    </a>
+</li>
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">

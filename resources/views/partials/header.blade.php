@@ -85,6 +85,12 @@
                 Game
             </a>
 
+            <a href="{{ route('jual') }}"
+               class="block px-3 py-2 rounded-md text-base font-medium
+               {{ request()->routeIs('jual') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50' }}">
+                Jual Chip
+            </a>
+
             <a href="{{ route('syarat-ketentuan') }}"
                class="block px-3 py-2 rounded-md text-base font-medium
                {{ request()->routeIs('syarat-ketentuan') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50' }}">
@@ -98,7 +104,7 @@
             </a>
 
             <!-- WhatsApp Button for Mobile -->
-            <a href="https://wa.me/6281234567890" target="_blank"
+            <a href="https://wa.me/6282276993219" target="_blank"
                class="block px-3 py-2 rounded-md text-base font-medium text-white bg-green-500 hover:bg-green-600 mt-2 text-center">
                 <div class="flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">

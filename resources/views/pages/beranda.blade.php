@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Hero Banner Slider with Promo -->
-    <div class="relative rounded-2xl overflow-hidden mb-16 h-64 sm:h-72 md:h-80 lg:h-96">
+    <div class="relative rounded-2xl overflow-hidden mb-16 h-96 sm:h-72 md:h-80 lg:h-96">
         <!-- Slider Track -->
         <div class="slider-track flex w-400 h-full transition-transform duration-800 ease-out" id="sliderTrack">
             <!-- Slide 1 - Main Top Up -->
@@ -83,7 +83,7 @@
             <!-- Slide 3 - Bonus Promo -->
             <div class="slide w-1/4 h-full relative flex-shrink-0">
                 <div class="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-indigo-900/80 z-10"></div>
-                <img src="{{ asset('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGdhbWluZ3xlbnwwfHwwfHx8MA%3D%3D') }}" alt="Game Collection" class="w-full h-full object-cover">
+                <img src="{{ asset('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FtaW5nfGVufDB8fDB8fHww') }}" alt="Game Collection" class="w-full h-full object-cover">
                 
                 <!-- Floating Particles -->
                 <div class="absolute inset-0 z-5 opacity-30">
@@ -119,7 +119,7 @@
             <!-- Slide 4 - Bonus Promo -->
             <div class="slide w-1/4 h-full relative flex-shrink-0">
                 <div class="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-indigo-900/80 z-10"></div>
-                <img src="{{ asset('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGdhbWluZ3xlbnwwfHwwfHx8MA%3D%3D') }}" alt="Game Collection" class="w-full h-full object-cover">
+                <img src="{{ asset('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FtaW5nfGVufDB8fDB8fHww') }}" alt="Game Collection" class="w-full h-full object-cover">
                 
                 <!-- Floating Particles -->
                 <div class="absolute inset-0 z-5 opacity-30">
@@ -234,97 +234,98 @@
     </div>
 
     <!-- Testimonials Section -->
-    <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8 md:p-12 mb-16">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Apa Kata Pelanggan Kami?</h2>
-        
-        <!-- Testimonials Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            @foreach($rates as $rate)
-            <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="flex items-center mb-4">
-                    <div class="text-yellow-400 mr-2 text-lg">
-                        @for ($i = 0; $i < $rate->stars; $i++)
-                            ★
-                        @endfor
-                        @for ($i = $rate->stars; $i < 5; $i++)
-                            ☆
-                        @endfor
-                    </div>
-                    <span class="text-sm text-gray-500">({{ $rate->stars }}/5)</span>
+<div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-8 md:p-12 mb-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Apa Kata Pelanggan Kami?</h2>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+        @foreach($rates as $rate)
+        <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="flex items-center mb-4">
+                <div class="text-yellow-400 mr-2 text-lg">
+                    @for ($i = 0; $i < $rate->stars; $i++)
+                        ★
+                    @endfor
+                    @for ($i = $rate->stars; $i < 5; $i++)
+                        ☆
+                    @endfor
                 </div>
-                <p class="text-gray-600 italic mb-4">"{{ $rate->description }}"</p>
-                <div class="flex items-center">
-                    <div class="bg-purple-100 text-purple-800 w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">
-                        {{ substr($rate->name, 0, 1) }}
-                    </div>
-                    <div>
-                        <h4 class="font-medium text-gray-900">{{ $rate->name }}</h4>
-                        <p class="text-sm text-gray-500">{{ $rate->created_at->format('d M Y') }}</p>
-                    </div>
+                <span class="text-sm text-gray-500">({{ $rate->stars }}/5)</span>
+            </div>
+            <p class="text-gray-600 italic mb-4">"{{ $rate->description }}"</p>
+            <div class="flex items-center">
+                <div class="bg-purple-100 text-purple-800 w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3">
+                    {{ substr($rate->name, 0, 1) }}
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-900">{{ $rate->name }}</h4>
+                    <p class="text-sm text-gray-500">{{ $rate->created_at->format('d M Y') }}</p>
                 </div>
             </div>
-            @endforeach
         </div>
+        @endforeach
+    </div>
 
-        <!-- Customer Input Form -->
-        <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm max-w-3xl mx-auto">
-            <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Bagikan Pengalaman Anda</h3>
-            
-            <form method="POST" action="{{ route('public.rate.store') }}" class="space-y-4">
-                @csrf
-                
-                <!-- Name Input -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Anda</label>
-                    <input type="text" id="name" name="name" required
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                           placeholder="Masukkan nama Anda">
-                </div>
+    <!-- Customer Input Form -->
+    <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm w-full mx-auto">
+        <h3 class="text-xl font-semibold text-gray-900 mb-6 text-center">Bagikan Pengalaman Anda</h3>
 
-                <!-- Kode Transaksi Input -->
-                <div>
-                    <label for="transaction_id" class="block text-sm font-medium text-gray-700 mb-1">Kode Transaksi</label>
+        <form method="POST" action="{{ route('public.rate.store') }}" class="space-y-4">
+            @csrf
+
+            <!-- Name Input -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Anda</label>
+                <input type="text" id="name" name="name" required
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                       placeholder="Masukkan nama Anda">
+            </div>
+
+            <!-- Kode Transaksi Input -->
+            <div>
+                <label for="transaction_id" class="block text-sm font-medium text-gray-700 mb-1">Kode Transaksi</label>
                 <input type="text" id="transaction_id" name="transaction_id" required
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all @error('transaction_id') border-red-500 @enderror"
                        placeholder="Masukkan Kode Transaksi Anda" value="{{ old('transaction_id') }}">
                 @error('transaction_id')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
+            </div>
+
+            <!-- Rating Input -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                <div class="flex space-x-2">
+                    @for($i = 1; $i <= 5; $i++)
+                        <button type="button" onclick="setRating({{ $i }})"
+                                class="text-2xl focus:outline-none rating-star"
+                                data-rating="{{ $i }}">
+                            ☆
+                        </button>
+                    @endfor
                 </div>
-                
-                <!-- Rating Input -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
-                    <div class="flex space-x-2">
-                        @for($i = 1; $i <= 5; $i++)
-                            <button type="button" onclick="setRating({{ $i }})" 
-                                    class="text-2xl focus:outline-none rating-star"
-                                    data-rating="{{ $i }}">
-                                ☆
-                            </button>
-                        @endfor
-                    </div>
-                    <input type="hidden" id="stars" name="stars" value="0" required>
-                </div>
-                
-                <!-- Testimonial Input -->
-                <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Testimonial</label>
-                    <textarea id="description" name="description" rows="4" required
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                              placeholder="Bagikan pengalaman Anda..."></textarea>
-                </div>
-                
-                <!-- Submit Button -->
-                <div class="pt-2">
-                    <button type="submit" 
-                            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
-                        Kirim Testimonial
-                    </button>
-                </div>
-            </form>
-        </div>
+                <input type="hidden" id="stars" name="stars" value="0" required>
+            </div>
+
+            <!-- Testimonial Input -->
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Testimonial</label>
+                <textarea id="description" name="description" rows="4" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                          placeholder="Bagikan pengalaman Anda..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-2">
+                <button type="submit"
+                        class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+                    Kirim Testimonial
+                </button>
+            </div>
+        </form>
     </div>
+</div>
+
 
     <!-- CTA Section -->
     <div class="text-center bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 md:p-12 text-white">

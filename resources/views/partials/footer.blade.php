@@ -91,12 +91,10 @@
 
     <!-- Copyright -->
     <div class="max-w-6xl mx-auto px-6 pt-8 mt-8 border-t border-gray-200">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-xs text-gray-500">Copyright © 2025 Aksata. All Rights Reserved</p>
-            <div class="flex gap-4">
-                <a href="#" class="text-xs text-gray-500 hover:text-purple-600 hover:underline">Kebijakan Privasi</a>
-                <a href="#" class="text-xs text-gray-500 hover:text-purple-600 hover:underline">Syarat Layanan</a>
-            </div>
-        </div>
+    <div class="flex justify-center">
+        <p class="text-xs text-gray-500 text-center">
+            Copyright © 2025 Aksata. All Rights Reserved
+        </p>
     </div>
+</div>
 </footer>

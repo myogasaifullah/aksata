@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('juals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
-            $table->integer('jumlah');
-            $table->integer('harga'); // <- GANTI dari 'jual' ke 'harga'
+            $table->string('jumlah');
+            $table->string('harga'); // <- GANTI dari 'jual' ke 'harga'
             $table->timestamps();
         });
     }

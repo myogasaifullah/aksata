@@ -11,7 +11,14 @@
             </ol>
             <h6 class="font-weight-bolder mb-0">Jual</h6>
         </nav>
-        
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    <label class="form-label">Type here...</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -33,56 +40,48 @@
                         </button>
                     </div>
 
-                   @foreach ($jualsGrouped as $gameName => $jualsByGame)
-    @php
-        $gameName = optional($jualsByGame->first()->game)->nama ?? 'Game Tidak Diketahui';
-    @endphp
-    <div class="card my-5">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">{{ $gameName }}</h6>
-            </div>
-        </div>
-        <div class="card-body px-0 pb-2">
-            <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                            <th>Game</th>
-                            <th>Jumlah</th>
-                            <th class="text-center">Harga</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($jualsByGame as $jual)
-                        <tr>
-                            <td>{{ $jual->game->nama ?? 'N/A' }}</td>
-                            <td>{{ $jual->jumlah }}</td>
-                            <td class="text-center">Rp {{ number_format($jual->harga, 0, ',', '.') }}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-link text-dark px-3 mb-0 edit-jual-btn"
-                                    data-bs-toggle="modal" data-bs-target="#editJualModal"
-                                    data-id="{{ $jual->id }}"
-                                    data-game_id="{{ $jual->game_id }}"
-                                    data-jumlah="{{ $jual->jumlah }}"
-                                    data-harga="{{ $jual->harga }}">
-                                    <i class="material-icons text-sm me-2">edit</i>Edit
-                                </button>
-                                <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-jual-btn"
-                                    data-id="{{ $jual->id }}">
-                                    <i class="material-icons text-sm me-2">delete</i>Delete
-                                </button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-@endforeach
+                    @foreach ($jualsGrouped as $gameName => $jualsByGame)
+                    <div class="card my-5">
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Game</th>
+                                            <th>Jumlah</th>
+                                            <th class="text-center">Harga</th>
+                                            <th class="text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($jualsByGame as $jual)
+                                        <tr>
+                                            <td>{{ $jual->game->nama ?? 'N/A' }}</td>
+                                            <td>{{ $jual->jumlah }}</td>
+                                            <td class="text-center">Rp {{ number_format($jual->harga, 0, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-link text-dark px-3 mb-0 edit-jual-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#editJualModal"
+                                                    data-id="{{ $jual->id }}"
+                                                    data-game_id="{{ $jual->game_id }}"
+                                                    data-jumlah="{{ $jual->jumlah }}"
+                                                    data-harga="{{ $jual->harga }}">
+                                                    <i class="material-icons text-sm me-2">edit</i>Edit
+                                                </button>
 
+                                                <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-jual-btn"
+                                                    data-id="{{ $jual->id }}">
+                                                    <i class="material-icons text-sm me-2">delete</i>Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -106,7 +105,7 @@
                             <option value="{{ $game->id }}">{{ $game->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="number" name="jumlah" class="form-control mb-3" placeholder="Jumlah" min="1" required>
+                        <input type="string" name="jumlah" class="form-control mb-3" placeholder="Jumlah" >
                         <input type="number" name="harga" class="form-control mb-3" placeholder="Harga" min="0" required>
                     </div>
                     <div class="modal-footer">
@@ -135,8 +134,8 @@
                             <option value="{{ $game->id }}">{{ $game->nama }}</option>
                             @endforeach
                         </select>
-                        <input type="number" name="jumlah" id="edit_jumlah" class="form-control mb-3" min="1" required>
-                        <input type="number" name="harga" id="edit_harga" class="form-control mb-3" min="0" required>
+                        <input type="string" name="jumlah" id="edit_jumlah" class="form-control mb-3">
+                        <input type="string" name="harga" id="edit_harga" class="form-control mb-3" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

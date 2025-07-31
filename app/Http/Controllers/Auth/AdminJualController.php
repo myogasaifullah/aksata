@@ -39,8 +39,8 @@ class AdminJualController extends Controller
     {
         $validated = $request->validate([
             'game_id' => 'required|exists:games,id',
-            'jumlah' => 'required|integer|min:1',
-            'harga' => 'required|integer|min:0',
+            'jumlah' => 'required|string',
+            'harga' => 'required|string',
         ]);
 
         Jual::create($validated);
@@ -53,8 +53,8 @@ class AdminJualController extends Controller
     {
         $validated = $request->validate([
             'game_id' => 'required|exists:games,id',
-            'jumlah' => 'required|integer|min:1',
-            'harga' => 'required|integer|min:0',
+            'jumlah' => 'required|string',
+            'harga' => 'required|string',
         ]);
 
         $jual->update($validated);

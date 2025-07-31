@@ -103,8 +103,13 @@
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0">
-        <div class="mx-3">
-            <a class="btn bg-gradient-primary mt-4 w-100" type="button">Logout</a>
-        </div>
+    <div class="mx-3">
+        <!-- Logout Button -->
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn bg-gradient-primary mt-4 w-100">Logout</button>
+        </form>
     </div>
+</div>
+
 </aside>

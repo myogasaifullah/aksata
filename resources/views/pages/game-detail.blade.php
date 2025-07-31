@@ -28,16 +28,9 @@
                         {{ $game->nama }}
                     </h2>
                     <span class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm w-fit">
-                        Domino Game
+
                     </span>
                 </div>
-
-                <p class="text-sm text-gray-600 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                    </svg>
-                    <span class="font-semibold text-purple-600">HIGOGAME</span>
-                </p>
 
 
 
@@ -46,7 +39,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="text-gray-700">15-30 Menit</span>
+                        <span class="text-gray-700">1-5 Menit</span>
                     </div>
                     <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full shadow-inner border border-purple-100">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -177,8 +170,8 @@
 
             <!-- Input hidden untuk produk -->
             <input type="hidden" name="produk" x-model="selectedPackage ? selectedPackage.label : ''">
-<!-- Input hidden untuk total harga -->
-<input type="hidden" name="total" x-model="selectedPackage ? selectedPackage.price : ''">
+            <!-- Input hidden untuk total harga -->
+            <input type="hidden" name="total" x-model="selectedPackage ? selectedPackage.price : ''">
 
             <div class="space-y-3">
                 <!-- Package Type -->
@@ -210,157 +203,166 @@
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                             @if(isset($hargas) && $hargas->count() > 0)
                             @foreach ($hargas as $harga)
-                            <div @click="selectedPackage = { label: '{{ $harga->jumlah }} Chip', price: '{{ $harga->harga }}' }"
+                            @php
+                            $jumlah = (int) $harga->jumlah;
+                            if ($jumlah < 100) {
+                                $label=$jumlah . ' B' ;
+                                } else {
+                                $label=$jumlah. ' M' ;
+                                }
+                                @endphp
+                                <div @click="selectedPackage = { label: '{{ $label }}', price: '{{ $harga->harga }}' }"
                                 class="border border-gray-200 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:border-purple-300 hover:bg-purple-50"
-                                :class="{ 'border-purple-500 bg-purple-50': selectedPackage && selectedPackage.label === '{{ $harga->jumlah }} Chip' }">
-                                <div class="font-semibold text-gray-800">{{ $harga->jumlah }} Chip</div>
+                                :class="{ 'border-purple-500 bg-purple-50': selectedPackage && selectedPackage.label === '{{ $label }}' }">
+                                <div class="font-semibold text-gray-800">{{ $label }}</div>
                                 <div class="text-sm text-gray-600 mt-1">Rp {{ number_format($harga->harga, 0, ',', '.') }}</div>
-                                <div x-show="selectedPackage && selectedPackage.label === '{{ $harga->jumlah }} Chip'"
+                                <div x-show="selectedPackage && selectedPackage.label === '{{ $label }}'"
                                     class="flex justify-end mt-1">
                                     <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">Dipilih</span>
                                 </div>
-                            </div>
-                            @endforeach
-                            @else
-                            <div class="text-gray-500">Harga paket tidak tersedia.</div>
-                            @endif
                         </div>
+                        @endforeach
+
+                        @else
+                        <div class="text-gray-500">Harga paket tidak tersedia.</div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-200" x-data="{ openPayment: null, selectedPayment: null }">
-            <div class="flex items-center mb-4">
-                <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">4</div>
-                <h3 class="text-lg font-semibold text-gray-800">Pilih Pembayaran</h3>
-            </div>
+    <div class="bg-white shadow-sm p-6 rounded-2xl mt-6 border border-gray-200" x-data="{ openPayment: null, selectedPayment: null }">
+        <div class="flex items-center mb-4">
+            <div class="bg-gradient-to-br from-purple-500 to-indigo-500 text-white font-bold w-7 h-7 flex items-center justify-center rounded-full mr-3 text-sm shadow-sm">4</div>
+            <h3 class="text-lg font-semibold text-gray-800">Pilih Pembayaran</h3>
+        </div>
 
-            <input type="hidden" name="metode" x-model="selectedPayment ? selectedPayment.method : ''" />
+        <input type="hidden" name="metode" x-model="selectedPayment ? selectedPayment.method : ''" />
 
-            <div class="space-y-3">
-                <!-- BANK -->
-                <div class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300" :class="{ 'border-purple-500': openPayment === 'bank' }">
-                    <button type="button" @click="openPayment = openPayment === 'bank' ? null : 'bank'" class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all" :class="{ 'bg-gray-50': openPayment === 'bank' }">
-                        <div class="flex items-center gap-3">
-                            <span class="bg-green-100 p-2 rounded-lg border border-green-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        <div class="space-y-3">
+            <!-- BANK -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300" :class="{ 'border-purple-500': openPayment === 'bank' }">
+                <button type="button" @click="openPayment = openPayment === 'bank' ? null : 'bank'" class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all" :class="{ 'bg-gray-50': openPayment === 'bank' }">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-green-100 p-2 rounded-lg border border-green-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <h4 class="font-medium text-gray-800">Transfer Bank</h4>
+                            <p class="text-xs text-gray-500 mt-1">BRI, BNI, Mandiri, CIMB</p>
+                        </div>
+                    </div>
+                    <svg :class="{ 'rotate-180 text-purple-600': openPayment === 'bank' }" class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <div x-show="openPayment === 'bank'" x-collapse class="bg-white border-t border-gray-200">
+                    @foreach ($payments as $payment)
+                    <button type="button" @click="selectedPayment = { type: 'bank', method: '{{ $payment->method }}', value: '{{ $payment->account_number }}' }"
+                        class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
+                        :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $payment->method }}' }">
+                        <div class="flex items-center gap-4">
+                            <img src="{{ asset('storage/' . $payment->image) }}" alt="{{ $payment->method }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+                            <span class="font-medium text-gray-800">{{ $payment->method }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-semibold text-gray-700">{{ $payment->account_number }}</span>
+                            <div x-show="selectedPayment && selectedPayment.method === '{{ $payment->method }}'" class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
-                            </span>
-                            <div>
-                                <h4 class="font-medium text-gray-800">Transfer Bank</h4>
-                                <p class="text-xs text-gray-500 mt-1">BRI, BNI, Mandiri, CIMB</p>
                             </div>
                         </div>
-                        <svg :class="{ 'rotate-180 text-purple-600': openPayment === 'bank' }" class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
                     </button>
+                    @endforeach
+                </div>
+            </div>
 
-                    <div x-show="openPayment === 'bank'" x-collapse class="bg-white border-t border-gray-200">
-                        @foreach ($payments as $payment)
-                        <button type="button" @click="selectedPayment = { type: 'bank', method: '{{ $payment->method }}', value: '{{ $payment->account_number }}' }"
-                            class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
-                            :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $payment->method }}' }">
-                            <div class="flex items-center gap-4">
-                                <img src="{{ asset('storage/' . $payment->image) }}" alt="{{ $payment->method }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-                                <span class="font-medium text-gray-800">{{ $payment->method }}</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-semibold text-gray-700">{{ $payment->account_number }}</span>
-                                <div x-show="selectedPayment && selectedPayment.method === '{{ $payment->method }}'" class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </button>
-                        @endforeach
+            <!-- EWALLET -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300" :class="{ 'border-purple-500': openPayment === 'ewallet' }">
+                <button type="button" @click="openPayment = openPayment === 'ewallet' ? null : 'ewallet'" class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all" :class="{ 'bg-gray-50': openPayment === 'ewallet' }">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-blue-100 p-2 rounded-lg border border-blue-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                        </span>
+                        <div>
+                            <h4 class="font-medium text-gray-800">E-Wallet</h4>
+                            <p class="text-xs text-gray-500 mt-1">QRIS, ShopeePay, OVO, Dana</p>
+                        </div>
                     </div>
+                    <svg :class="{ 'rotate-180 text-purple-600': openPayment === 'ewallet' }" class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <div x-show="openPayment === 'ewallet'" x-collapse class="bg-white border-t border-gray-200">
+                    @foreach ($qrs as $qr)
+                    <button type="button" @click="selectedPayment = { type: 'ewallet', method: 'QR Code', value: '{{ $qr->id }}' }"
+                        class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
+                        :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}' }">
+                        <div class="flex items-center gap-4">
+                            <img src="{{ asset('storage/' . $qr->gambar) }}" alt="QR Code" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+                            <span class="font-medium text-gray-800">QR Code</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div x-show="selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}'" class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                    @endforeach
                 </div>
 
-                <!-- EWALLET -->
-                <div class="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-300" :class="{ 'border-purple-500': openPayment === 'ewallet' }">
-                    <button type="button" @click="openPayment = openPayment === 'ewallet' ? null : 'ewallet'" class="w-full text-left px-5 py-4 bg-white flex justify-between items-center transition-all" :class="{ 'bg-gray-50': openPayment === 'ewallet' }">
-                        <div class="flex items-center gap-3">
-                            <span class="bg-blue-100 p-2 rounded-lg border border-blue-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                <div x-show="openPayment === 'ewallet'" x-collapse class="bg-white border-t border-gray-200">
+                    @foreach ($ewalets as $ewalet)
+                    <button type="button"
+                        @click="selectedPayment = { type: 'ewallet', method: '{{ $ewalet->nama }}', value: '{{ $ewalet->id }}' }"
+                        class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
+                        :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}' }">
+
+                        <div class="flex items-center gap-4">
+                            <img src="{{ asset('storage/' . $ewalet->gambar) }}" alt="{{ $ewalet->nama }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
+                            <span class="font-medium text-gray-800">{{ $ewalet->nama }}</span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <div x-show="selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}'"
+                                class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
-                            </span>
-                            <div>
-                                <h4 class="font-medium text-gray-800">E-Wallet</h4>
-                                <p class="text-xs text-gray-500 mt-1">QRIS, ShopeePay, OVO, Dana</p>
                             </div>
                         </div>
-                        <svg :class="{ 'rotate-180 text-purple-600': openPayment === 'ewallet' }" class="w-5 h-5 text-gray-500 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
                     </button>
+                    @endforeach
+                </div>
 
-                    <div x-show="openPayment === 'ewallet'" x-collapse class="bg-white border-t border-gray-200">
-                        @foreach ($qrs as $qr)
-                        <button type="button" @click="selectedPayment = { type: 'ewallet', method: 'QR Code', value: '{{ $qr->id }}' }"
-                            class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
-                            :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}' }">
-                            <div class="flex items-center gap-4">
-                                <img src="{{ asset('storage/' . $qr->gambar) }}" alt="QR Code" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-                                <span class="font-medium text-gray-800">QR Code</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <div x-show="selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}'" class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </button>
-                        @endforeach
-                    </div>
-
-                    <div x-show="openPayment === 'ewallet'" x-collapse class="bg-white border-t border-gray-200">
-    @foreach ($ewalets as $ewalet)
-    <button type="button" 
-        @click="selectedPayment = { type: 'ewallet', method: '{{ $ewalet->nama }}', value: '{{ $ewalet->id }}' }"
-        class="w-full flex justify-between items-center p-4 border-b border-gray-100 cursor-pointer transition-all duration-200 hover:bg-purple-50 text-left"
-        :class="{ 'bg-purple-50': selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}' }">
-        
-        <div class="flex items-center gap-4">
-            <img src="{{ asset('storage/' . $ewalet->gambar) }}" alt="{{ $ewalet->nama }}" class="h-8 object-contain border border-gray-200 rounded-md p-1 bg-white">
-            <span class="font-medium text-gray-800">{{ $ewalet->nama }}</span>
-        </div>
-        
-        <div class="flex items-center gap-2">
-            <div x-show="selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}'" 
-                class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
             </div>
         </div>
-    </button>
-    @endforeach
+    </div>
+
+
+    <!-- Tombol Submit -->
+
 </div>
-
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Tombol Submit -->
-       
-        </div>
 <div class="mt-8 text-center animate-fade-in">
     <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-10 py-3 rounded-lg shadow transition duration-300 ease-in-out inline-block">
         Lanjutkan ke Pembayaran
-                </button>
+    </button>
 </div>
 
 </div>
 
-        </form>
-    </div>
+</form>
+</div>
 </div>
 
 @endsection

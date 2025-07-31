@@ -74,18 +74,6 @@
                     </div>
                 </div>
             </div>
-            
-            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-purple-200">Region</h3>
-            <div class="flex items-center gap-3">
-                <div class="relative w-6 h-4 overflow-hidden rounded-sm shadow">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-red-600"></div>
-                    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-white"></div>
-                </div>
-                <div>
-                    <p class="font-medium">Indonesia</p>
-                    <p class="text-sm text-gray-500">(Rp)</p>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -1,12 +1,15 @@
 <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo with hover effect -->
-            <div class="flex-shrink-0">
-    <a href="{{ url('/') }}" class="flex items-center group">
-        <img src="{{ asset('images/logo-aksata.png') }}" alt="AKSATA Logo" class="h-8 transition-all duration-300 group-hover:opacity-80">
-    </a>
-</div>
+    <div class="flex justify-between items-center h-16">
+        <!-- Logo with hover effect -->
+        <div class="flex-shrink-0">
+            <a href="{{ url('/') }}" class="flex items-center group">
+                <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent transition-all duration-300 group-hover:from-purple-700 group-hover:to-indigo-700">
+                    AKSATA
+                </span>
+            </a>
+        </div>
+
 
 
             <!-- Desktop Navigation -->

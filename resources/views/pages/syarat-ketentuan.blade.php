@@ -14,7 +14,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Terakhir diperbarui: 1 Januari 2023
+            Terakhir diperbarui: 1 Agustus 2025
         </p>
     </div>
 
@@ -23,7 +23,7 @@
         <!-- Introduction -->
         <div class="mb-8">
             <p class="text-gray-700 leading-relaxed">
-                Selamat datang di Royal Play Coins. Dengan mengakses atau menggunakan layanan kami, Anda setuju untuk terikat oleh syarat dan ketentuan berikut. Harap baca dengan seksama sebelum menggunakan layanan kami.
+                Selamat datang di Aksata Store. Dengan mengakses atau menggunakan layanan kami, Anda setuju untuk terikat oleh syarat dan ketentuan berikut. Harap baca dengan seksama sebelum menggunakan layanan kami.
             </p>
         </div>
 
@@ -138,9 +138,8 @@
                 <div class="space-y-3 text-gray-700">
                     <p>Jika Anda memiliki pertanyaan tentang Syarat & Ketentuan ini, silakan hubungi:</p>
                     <ul class="list-disc pl-8 space-y-2">
-                        <li>Email: support@royalplaycoins.com</li>
-                        <li>WhatsApp: +62 812-3456-7890</li>
-                        <li>Live Chat: Tersedia di aplikasi kami</li>
+                        <li>Email: aksatastore@gmail.com</li>
+                        <li>WhatsApp: +62 822-7699-3219</li>
                     </ul>
                 </div>
             </div>

@@ -3,7 +3,11 @@
         <!-- Logo and Social -->
         <div class="md:col-span-2">
             <div class="flex flex-col items-center md:items-start">
-                <img src="{{ asset('assets/images/logofooter.png') }}" alt="Logo Aksata" class="w-48 mb-4">
+                <a href="{{ url('/') }}" class="flex items-center group">
+                <span class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent transition-all duration-300 group-hover:from-purple-700 group-hover:to-indigo-700">
+                    AKSATA
+                </span>
+            </a>
                 <p class="text-sm text-gray-600 mb-6 text-center md:text-left">Platform top up game terpercaya dengan layanan 24 jam</p>
                 
                 <div class="flex gap-5 text-2xl mb-6">
@@ -72,18 +76,6 @@
                         <p class="font-medium">Website</p>
                         <p class="text-sm text-gray-600">www.aksata.com</p>
                     </div>
-                </div>
-            </div>
-            
-            <h3 class="text-lg font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-purple-200">Region</h3>
-            <div class="flex items-center gap-3">
-                <div class="relative w-6 h-4 overflow-hidden rounded-sm shadow">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-red-600"></div>
-                    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-white"></div>
-                </div>
-                <div>
-                    <p class="font-medium">Indonesia</p>
-                    <p class="text-sm text-gray-500">(Rp)</p>
                 </div>
             </div>
         </div>

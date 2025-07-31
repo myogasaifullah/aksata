@@ -33,7 +33,7 @@
                     data-game="game{{ $game->id }}">
                     <div class="flex items-center justify-center gap-3">
                         <div class="w-8 h-8 {{ $index === 0 ? 'bg-white/20' : 'bg-gray-300' }} rounded-lg flex items-center justify-center">
-                            <span class="text-lg">🎮</span>
+                            <img src="{{ $game->gambar }}">
                         </div>
                         <div>
                             <div class="font-bold">{{ $game->nama }}</div>

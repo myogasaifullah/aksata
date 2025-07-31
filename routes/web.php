@@ -20,7 +20,8 @@ use App\Models\Order;
 use App\Models\Rate;
 use App\Models\Payment;
 use App\Models\Qr;
-
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Auth\AdminJualController;
 // ==============================
 // Halaman Publik
 // ==============================
@@ -37,9 +38,8 @@ Route::get('/syarat-ketentuan', function () {
     return view('pages.syarat-ketentuan');
 })->name('syarat-ketentuan');
 
-Route::get('/jual', function () {
-    return view('pages.jual');
-})->name('jual');
+Route::get('/jual', [AdminJualController::class, 'jual'])->name('jual');
+
 
 Route::get('/riwayat-pembelian', [App\Http\Controllers\Auth\AdminOrderController::class, 'history'])->name('riwayat-pembelian');
 
@@ -88,8 +88,7 @@ Route::post('logout', function () {
 // Dashboard & Admin Area
 // ==============================
 
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\Auth\AdminJualController;
+
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])

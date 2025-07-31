@@ -22,6 +22,19 @@ class AdminJualController extends Controller
         return view('admin.jual', compact('jualsGrouped', 'games'));
     }
 
+    public function jual()
+    {
+        // Ambil semua data jual beserta relasi game-nya
+        $juals = Jual::with('game')->get();
+
+        // Kelompokkan berdasarkan nama game
+        $jualsGrouped = $juals->groupBy(fn($jual) => $jual->game->nama);
+
+        $games = Game::all();
+
+        return view('pages.jual', compact('jualsGrouped', 'games'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

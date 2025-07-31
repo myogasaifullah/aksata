@@ -123,57 +123,64 @@
                     </div>
 
                     <!-- Loop through grouped harga data with more space between each table -->
-                    @foreach ($hargasGrouped as $gameName => $hargasByGame)
-                    <div class="card my-5"> <!-- Increased my-5 here for more margin-top and margin-bottom for each table -->
-                        <div class="card-body px-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Game</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($hargasByGame as $harga)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $harga->game->nama ?? 'N/A' }}</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $harga->jumlah }}</p>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">Rp {{ number_format($harga->harga, 0, ',', '.') }}</span>
-                                            </td>
-                                            <td class="align-middle d-flex justify-content-center align-items-center">
-                                                <button type="button" class="btn btn-link text-dark px-3 mb-0 edit-harga-btn"
-                                                    data-bs-toggle="modal" data-bs-target="#editHargaModal"
-                                                    data-id="{{ $harga->id }}"
-                                                    data-game_id="{{ $harga->game_id }}"
-                                                    data-jumlah="{{ $harga->jumlah }}"
-                                                    data-harga="{{ $harga->harga }}">
-                                                    <i class="material-icons text-sm me-2">edit</i>Edit
-                                                </button>
-                                                <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-harga-btn"
-                                                    data-id="{{ $harga->id }}">
-                                                    <i class="material-icons text-sm me-2">delete</i>Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                    @foreach ($hargasGrouped as $gameId => $hargasByGame)
+    @php
+        $gameName = optional($hargasByGame->first()->game)->nama ?? 'Game Tidak Diketahui';
+    @endphp
+    <div class="card my-5">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <h5 class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                 <small class="text-white text-capitalize ps-3">(game: {{ $gameId }})</small>
+            </h5>
+            <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Game</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jumlah</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($hargasByGame as $harga)
+                        <tr>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ $harga->game->nama ?? 'N/A' }}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $harga->jumlah }}</p>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">Rp {{ number_format($harga->harga, 0, ',', '.') }}</span>
+                            </td>
+                            <td class="align-middle d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn btn-link text-dark px-3 mb-0 edit-harga-btn"
+                                    data-bs-toggle="modal" data-bs-target="#editHargaModal"
+                                    data-id="{{ $harga->id }}"
+                                    data-game_id="{{ $harga->game_id }}"
+                                    data-jumlah="{{ $harga->jumlah }}"
+                                    data-harga="{{ $harga->harga }}">
+                                    <i class="material-icons text-sm me-2">edit</i>Edit
+                                </button>
+                                <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-harga-btn"
+                                    data-id="{{ $harga->id }}">
+                                    <i class="material-icons text-sm me-2">delete</i>Delete
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endforeach
+
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
         <!-- Logo and Social -->
         <div class="md:col-span-2">
             <div class="flex flex-col items-center md:items-start">
-                <img src="{{ asset('assets/images/logofooter.png') }}" alt="Logo Aksata" class="w-48 mb-4">
+                <img src="{{ asset('assets/img/logoaksata.png') }}" alt="Logo Aksata" class="w-48 mb-4">
                 <p class="text-sm text-gray-600 mb-6 text-center md:text-left">Platform top up game terpercaya dengan layanan 24 jam</p>
                 
                 <div class="flex gap-5 text-2xl mb-6">

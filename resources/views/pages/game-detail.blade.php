@@ -270,7 +270,7 @@
                             <span class="font-medium text-gray-800">{{ $payment->method }}</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="font-semibold text-gray-700">{{ $payment->account_number }}</span>
+                            <span class="font-semibold text-gray-700">{{ $payment->atas_nama }}</span>
                             <div x-show="selectedPayment && selectedPayment.method === '{{ $payment->method }}'" class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -311,6 +311,7 @@
                             <span class="font-medium text-gray-800">QR Code</span>
                         </div>
                         <div class="flex items-center gap-2">
+                                                        <span class="font-semibold text-gray-700">{{ $qr->atasnama }}</span>
                             <div x-show="selectedPayment && selectedPayment.method === 'QR Code' && selectedPayment.value == '{{ $qr->id }}'" class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -333,7 +334,9 @@
                             <span class="font-medium text-gray-800">{{ $ewalet->nama }}</span>
                         </div>
 
+
                         <div class="flex items-center gap-2">
+                            <span class="font-semibold text-gray-700">{{ $ewalet->atasnama }}</span>
                             <div x-show="selectedPayment && selectedPayment.method === '{{ $ewalet->nama }}' && selectedPayment.value == '{{ $ewalet->id }}'"
                                 class="w-5 h-5 flex items-center justify-center bg-purple-500 text-white rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">

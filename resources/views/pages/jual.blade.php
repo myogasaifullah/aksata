@@ -276,7 +276,7 @@
                 const game = gameData[gameId];
                 selectedGameName.textContent = game.name;
                 selectedGameCurrency.textContent = game.currency;
-                whatsappLink.href = `https://wa.me/6281234567890?text=${game.whatsappText}`;
+                whatsappLink.href = `https://wa.me/6282276993219?text=${game.whatsappText}`;
             });
         });
     });

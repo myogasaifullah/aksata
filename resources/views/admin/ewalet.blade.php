@@ -31,7 +31,7 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">atasnama</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Atas Nama</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deskripsi</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                 </tr>
@@ -68,7 +68,7 @@
                             <input type="text" name="nama" value="{{ $ewalet->nama }}" class="form-control" required>
                           </div>
                           <div class="mb-3">
-                            <label>atasnama</label>
+                            <label>Atas Nama</label>
                             <input type="text" name="atasnama" value="{{ $ewalet->atasnama }}" class="form-control" required>
                           </div>
                           <div class="mb-3">
@@ -76,8 +76,12 @@
                             <textarea name="deskripsi" class="form-control" required>{{ $ewalet->deskripsi }}</textarea>
                           </div>
                           <div class="mb-3">
-                            <label>Gambar</label>
+                            <label>Gambar Baru (opsional)</label>
                             <input type="file" name="gambar" class="form-control">
+                            <div class="mt-2">
+                              <small>Gambar saat ini:</small><br>
+                              <img src="{{ asset('storage/' . $ewalet->gambar) }}" width="100">
+                            </div>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -112,7 +116,7 @@
             <input type="text" name="nama" class="form-control" required>
           </div>
           <div class="mb-3">
-            <label>atasnama</label>
+            <label>Atas Nama</label>
             <input type="text" name="atasnama" class="form-control" required>
           </div>
           <div class="mb-3">

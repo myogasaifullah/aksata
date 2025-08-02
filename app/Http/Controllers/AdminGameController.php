@@ -49,7 +49,7 @@ class AdminGameController extends Controller
             'cara_bermain' => $request->cara_bermain,
         ]);
 
-        return redirect()->route('admin.games.index')->with('success', 'Game created successfully.');
+        return redirect()->route('admin.games.index')->with('success', 'Game berhasil ditambahkan.');
     }
 
     public function edit(Game $game)
@@ -67,6 +67,7 @@ class AdminGameController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
+            // Delete old image if exists
             if ($game->gambar) {
                 $oldPath = str_replace('/storage', 'public', $game->gambar);
                 Storage::delete($oldPath);
@@ -85,11 +86,12 @@ class AdminGameController extends Controller
         $game->cara_bermain = $request->cara_bermain;
         $game->save();
 
-        return redirect()->route('admin.games.index')->with('success', 'Game updated successfully.');
+        return redirect()->route('admin.games.index')->with('success', 'Game berhasil diupdate.');
     }
 
     public function destroy(Game $game)
     {
+        // Delete image file if exists
         if ($game->gambar) {
             $oldPath = str_replace('/storage', 'public', $game->gambar);
             Storage::delete($oldPath);
@@ -97,7 +99,7 @@ class AdminGameController extends Controller
 
         $game->delete();
 
-        return redirect()->route('admin.games.index')->with('success', 'Game deleted successfully.');
+        return redirect()->route('admin.games.index')->with('success', 'Game berhasil dihapus.');
     }
 
     public function show($id)

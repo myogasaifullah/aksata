@@ -53,9 +53,10 @@ class PaymentsController extends Controller
         $payment = Payment::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            // Delete old image
-            Storage::disk('public')->delete($payment->image);
-            // Store new image
+            // Hapus gambar lama
+            if ($payment->image) {
+                Storage::disk('public')->delete($payment->image);
+            }
             $imagePath = $request->file('image')->store('payments', 'public');
             $payment->image = $imagePath;
         }
@@ -71,7 +72,13 @@ class PaymentsController extends Controller
     public function destroy($id)
     {
         $payment = Payment::findOrFail($id);
-        Storage::disk('public')->delete($payment->image);
+        
+        // Hapus file gambar dari storage
+        if ($payment->image) {
+            Storage::disk('public')->delete($payment->image);
+        }
+        
+        // Hapus data dari database
         $payment->delete();
 
         return redirect()->route('admin.pembayaran.index')->with('success', 'Payment deleted successfully.');

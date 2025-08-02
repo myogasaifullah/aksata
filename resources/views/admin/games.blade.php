@@ -65,7 +65,9 @@
                       <i class="material-icons text-sm me-2">edit</i>Edit
                     </button>
                     <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-game-btn"
-                      data-id="{{ $game->id }}">
+                      data-bs-toggle="modal" data-bs-target="#deleteGameModal"
+                      data-id="{{ $game->id }}"
+                      data-nama="{{ $game->nama }}">
                       <i class="material-icons text-sm me-2">delete</i>Delete
                     </button>
                   </td>
@@ -158,17 +160,21 @@
   <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteGameModalLabel">Konfirmasi Hapus</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Yakin ingin menghapus game inii?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteGameBtn">Hapus</button>
-        </div>
+        <form id="deleteGameForm" method="POST" action="">
+          @csrf
+          @method('DELETE')
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteGameModalLabel">Konfirmasi Hapus</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Yakin ingin menghapus game "<span id="deleteGameName"></span>"?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-danger">Hapus</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -177,9 +183,9 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const editGameForm = document.getElementById('editGameForm');
-    const deleteGameModal = new bootstrap.Modal(document.getElementById('deleteGameModal'));
-    let gameIdToDelete = null;
+    const deleteGameForm = document.getElementById('deleteGameForm');
 
+    // Handle edit button clicks
     document.querySelectorAll('.edit-game-btn').forEach(button => {
       button.addEventListener('click', function () {
         const gameId = this.getAttribute('data-id');
@@ -187,7 +193,7 @@
         const gameDeskripsi = this.getAttribute('data-deskripsi');
         const gameCaraBermain = this.getAttribute('data-cara_bermain');
 
-        editGameForm.action = `/games/${gameId}`;
+        editGameForm.action = `{{ route('admin.games.index') }}/${gameId}`;
         editGameForm.querySelector('#editGameName').value = gameName;
         editGameForm.querySelector('#editGameImage').value = '';
         editGameForm.querySelector('#editGameDesc').value = gameDeskripsi || '';
@@ -195,30 +201,15 @@
       });
     });
 
+    // Handle delete button clicks
     document.querySelectorAll('.delete-game-btn').forEach(button => {
       button.addEventListener('click', function () {
-        gameIdToDelete = this.getAttribute('data-id');
-        deleteGameModal.show();
+        const gameId = this.getAttribute('data-id');
+        const gameName = this.getAttribute('data-nama');
+        
+        deleteGameForm.action = `{{ route('admin.games.index') }}/${gameId}`;
+        document.getElementById('deleteGameName').textContent = gameName;
       });
-    });
-
-    document.getElementById('confirmDeleteGameBtn').addEventListener('click', async function () {
-      if (!gameIdToDelete) return;
-      try {
-        const response = await fetch(`/games/${gameIdToDelete}`, {
-          method: 'DELETE',
-          headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
-        if (response.status >= 200 && response.status < 400) {
-          window.location.reload();
-        }
-      } catch (error) {}
-      deleteGameModal.hide(); 
-      gameIdToDelete = null;
     });
   });
 </script>

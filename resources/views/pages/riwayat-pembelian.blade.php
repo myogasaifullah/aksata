@@ -196,9 +196,9 @@
                                 <div class="text-sm text-gray-900">
                                     {{ \Carbon\Carbon::parse($order->tanggal)->format('d M Y') }}
                                 </div>
-                                <div class="text-xs text-gray-500">
+                                <!-- <div class="text-xs text-gray-500">
                                     {{ \Carbon\Carbon::parse($order->tanggal)->format('H:i') }} WIB
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-span-1">
                                 <div class="font-bold text-green-600 text-sm">

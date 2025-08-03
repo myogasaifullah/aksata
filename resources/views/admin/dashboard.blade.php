@@ -3,253 +3,177 @@
 @section('page-title', 'Admin Dashboard')
 
 @section('content')
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-    <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Dashboard</h6>
-        </nav>
-        
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item d-flex align-items-center">
-                    
-
-                    @guest
-                    <a href="{{ route('login') }}" class="nav-link text-body font-weight-bold px-0 border-0 bg-transparent">
-                        <i class="fa fa-user me-sm-1"></i>
-                        <span class="d-sm-inline d-none">Sign In</span>
-                    </a>
-                    @endguest
-                </li>
-                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                        <div class="sidenav-toggler-inner">
-                            <i class="sidenav-toggler-line"></i>
-                            <i class="sidenav-toggler-line"></i>
-                            <i class="sidenav-toggler-line"></i>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0">
-                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bell cursor-pointer"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New message</span> from admin
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            13 minutes ago
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="container-fluid py-4">
-    <!-- Summary Cards -->
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card bg-gradient-primary shadow-primary border-radius-lg">
-                <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-white shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">payment</i>
+    <!-- Summary Cards - Improved Layout -->
+    <div class="row g-4">
+        <div class="col-xl-3 col-sm-6">
+            <div class="card card-hover border-0 shadow-sm rounded-lg overflow-hidden">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-money-bill-wave text-primary fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Total Payments</h6>
+                            <h3 class="mb-0">{{ $payments->count() }}</h3>
+                        </div>
                     </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Total Payments</p>
-                        <h4 class="mb-0">{{ $payments->count() }}</h4>
-                    </div>
-                </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-white text-sm font-weight-bolder">View all payments</span></p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card bg-gradient-success shadow-success border-radius-lg">
-                <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-white shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">sports_esports</i>
-                    </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Total Games</p>
-                        <h4 class="mb-0">{{ $games->count() }}</h4>
-                    </div>
-                </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-white text-sm font-weight-bolder">View all games</span></p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card bg-gradient-info shadow-info border-radius-lg">
-                <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-white shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">attach_money</i>
-                    </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Harga Packages</p>
-                        <h4 class="mb-0">{{ $hargas->count() }}</h4>
-                    </div>
-                </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-white text-sm font-weight-bolder">View all packages</span></p>
+                    <a href="#" class="stretched-link"></a>
                 </div>
             </div>
         </div>
         
         <div class="col-xl-3 col-sm-6">
-            <div class="card bg-gradient-warning shadow-warning border-radius-lg">
-                <div class="card-header p-3 pt-2">
-                    <div class="icon icon-lg icon-shape bg-white shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">qr_code</i>
+            <div class="card card-hover border-0 shadow-sm rounded-lg overflow-hidden">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-gamepad text-success fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Total Games</h6>
+                            <h3 class="mb-0">{{ $games->count() }}</h3>
+                        </div>
                     </div>
-                    <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">QR Codes</p>
-                        <h4 class="mb-0">{{ $qrs->count() }}</h4>
-                    </div>
+                    <a href="#" class="stretched-link"></a>
                 </div>
-                <hr class="dark horizontal my-0">
-                <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-white text-sm font-weight-bolder">View all QR codes</span></p>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-sm-6">
+            <div class="card card-hover border-0 shadow-sm rounded-lg overflow-hidden">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-info bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-box-open text-info fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Harga Packages</h6>
+                            <h3 class="mb-0">{{ $hargas->count() }}</h3>
+                        </div>
+                    </div>
+                    <a href="#" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-sm-6">
+            <div class="card card-hover border-0 shadow-sm rounded-lg overflow-hidden">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-warning bg-opacity-10 p-3 rounded me-3">
+                            <i class="fas fa-qrcode text-warning fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">QR Codes</h6>
+                            <h3 class="mb-0">{{ $qrs->count() }}</h3>
+                        </div>
+                    </div>
+                    <a href="#" class="stretched-link"></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Charts Section -->
+    <!-- Charts Section - Modern Design -->
+    <div class="row mt-4 g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pb-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">Monthly Order Count</h5>
+                            <p class="text-muted mb-0 small">Order volume by month</p>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Export</a></li>
+                                <li><a class="dropdown-item" href="#">Refresh</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="monthlyOrderChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pb-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">Order Status Distribution</h5>
+                            <p class="text-muted mb-0 small">Current order status breakdown</p>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Export</a></li>
+                                <li><a class="dropdown-item" href="#">Refresh</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="statusPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders Table - Modern Design -->
     <div class="row mt-4">
-        <div class="col-lg-6 col-md-6 mt-4 mb-4">
-        <div class="card z-index-2">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                <div class="bg-gradient-info shadow-info border-radius-lg py-3 pe-1">
-                    <div class="chart">
-                        <canvas id="monthlyOrderChart" class="chart-canvas" height="170"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <h6 class="mb-0">Monthly Order Count</h6>
-                <p class="text-sm">Order volume by month</p>
-                <hr class="dark horizontal">
-                <div class="d-flex">
-                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                    <p class="mb-0 text-sm">Updated just now</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Order Status Distribution Chart (now with gradient styling) -->
-    <div class="col-lg-6 col-md-6 mt-4 mb-4">
-        <div class="card z-index-2">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                <div class="bg-gradient-danger shadow-danger border-radius-lg py-3 pe-1">
-                    <div class="chart">
-                        <canvas id="statusPieChart" class="chart-canvas" height="170"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <h6 class="mb-0">Order Status Distribution</h6>
-                <p class="text-sm">Current order status breakdown</p>
-                <hr class="dark horizontal">
-                <div class="d-flex">
-                    <i class="material-icons text-sm my-auto me-1">schedule</i>
-                    <p class="mb-0 text-sm">Updated 2 min ago</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- Tables Section -->
-    <div class="row mb-4">
-        <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Recent Orders</h6>
-                            <p class="text-sm mb-0">
-                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                <span class="font-weight-bold ms-1">{{ $orders->count() }} total</span>
-                            </p>
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pb-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">Recent Orders</h5>
+                            <p class="text-muted mb-0 small">{{ $orders->count() }} total orders</p>
                         </div>
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <li><a class="dropdown-item border-radius-md" href="javascript:;">View All</a></li>
-                                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Export</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
                     </div>
                 </div>
-                <div class="card-body px-0 pb-2">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
+                        <table class="table table-hover align-middle">
+                            <thead class="bg-light">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID Transaksi</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No Telp</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ID Game</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                    <th class="border-0">ID Transaksi</th>
+                                    <th class="border-0">No Telp</th>
+                                    <th class="border-0">ID Game</th>
+                                    <th class="border-0 text-end">Total</th>
+                                    <th class="border-0 text-center">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders->take(5) as $order)
                                 <tr>
                                     <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ $order->id_transaksi }}</h6>
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-primary bg-opacity-10 p-2 rounded me-2">
+                                                <i class="fas fa-receipt text-primary"></i>
                                             </div>
+                                            <span class="fw-medium">{{ $order->id_transaksi }}</span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->no_telp }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $order->game_id }}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold">{{ $order->total }}</span>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-{{ $order->status == 'completed' ? 'success' : 'warning' }}">
-                                            {{ $order->status }}
+                                    <td>{{ $order->no_telp }}</td>
+                                    <td>{{ $order->game_id }}</td>
+                                    <td class="text-end fw-medium">{{ $order->total }}</td>
+                                    <td class="text-center">
+                                        <span class="badge bg-{{ $order->status == 'completed' ? 'success' : 'warning' }}-subtle text-{{ $order->status == 'completed' ? 'success' : 'warning' }} rounded-pill">
+                                            {{ ucfirst($order->status) }}
                                         </span>
                                     </td>
                                 </tr>
@@ -261,28 +185,31 @@
             </div>
         </div>
         
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h6>Recent Payments</h6>
-                    <p class="text-sm">
-                        <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-                        <span class="font-weight-bold">{{ round($payments->count() / max(1, $payments->count() - 5) * 100) }}%</span> increase
-                    </p>
+        <!-- Recent Payments - Card Design -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pb-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">Recent Payments</h5>
+                            <p class="text-muted mb-0 small">{{ round($payments->count() / max(1, $payments->count() - 5) * 100) }}% increase</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body p-3">
-                    <div class="timeline timeline-one-side">
+                <div class="card-body">
+                    <div class="vstack gap-3">
                         @foreach ($payments->take(5) as $payment)
-                        <div class="timeline-block mb-3">
-                            <span class="timeline-step">
-                                <i class="material-icons text-{{ $payment->status == 'completed' ? 'success' : 'warning' }} text-gradient">payments</i>
-                            </span>
-                            <div class="timeline-content">
-                                <h6 class="text-dark text-sm font-weight-bold mb-0">Payment #{{ $payment->id }}</h6>
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                                    {{ $payment->method }} - {{ $payment->amount }}
-                                </p>
+                        <div class="d-flex align-items-center p-3 bg-light rounded">
+                            <div class="bg-{{ $payment->status == 'completed' ? 'success' : 'warning' }}-subtle p-2 rounded me-3">
+                                <i class="fas fa-{{ $payment->method == 'credit_card' ? 'credit-card' : 'money-bill-wave' }} text-{{ $payment->status == 'completed' ? 'success' : 'warning' }}"></i>
                             </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">Payment #{{ $payment->id }}</h6>
+                                <small class="text-muted">{{ ucfirst($payment->method) }} - {{ $payment->amount }}</small>
+                            </div>
+                            <span class="badge bg-{{ $payment->status == 'completed' ? 'success' : 'warning' }}-subtle text-{{ $payment->status == 'completed' ? 'success' : 'warning' }} rounded-pill">
+                                {{ ucfirst($payment->status) }}
+                            </span>
                         </div>
                         @endforeach
                     </div>
@@ -291,29 +218,35 @@
         </div>
     </div>
 
-    <!-- Additional Tables -->
-    <div class="row">
-        <div class="col-lg-6 mb-4">
-            <div class="card">
-                <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">Rates</h6>
+    <!-- Additional Data Tables -->
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pb-0">
+                    <h5 class="mb-0">Recent Rates</h5>
                 </div>
-                <div class="card-body pt-2 p-3">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
+                        <table class="table table-hover align-middle">
+                            <thead class="bg-light">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rate</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Game</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">deskripsi</th>
+                                    <th class="border-0">Stars</th>
+                                    <th class="border-0">Game</th>
+                                    <th class="border-0">Description</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($rates->take(5) as $rate)
                                 <tr>
-                                    <td>{{ $rate->stars }}</td>
+                                    <td>
+                                        <div class="star-rating">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fas fa-star{{ $i > $rate->stars ? '-empty' : '' }} text-warning"></i>
+                                            @endfor
+                                        </div>
+                                    </td>
                                     <td>{{ $rate->name }}</td>
-                                    <td>{{ $rate->description }}</td>
+                                    <td class="text-truncate" style="max-width: 200px;">{{ $rate->description }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -323,19 +256,19 @@
             </div>
         </div>
 
-        <div class="col-lg-6 mb-4">
-            <div class="card">
-                <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">Ewalets</h6>
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pb-0">
+                    <h5 class="mb-0">Ewallet Services</h5>
                 </div>
-                <div class="card-body pt-2 p-3">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
+                        <table class="table table-hover align-middle">
+                            <thead class="bg-light">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ewalet ID</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                                    <th class="border-0">ID</th>
+                                    <th class="border-0">Name</th>
+                                    <th class="border-0">Description</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -343,7 +276,7 @@
                                 <tr>
                                     <td>{{ $ewalet->id }}</td>
                                     <td>{{ $ewalet->nama }}</td>
-                                    <td>{{ $ewalet->deskripsi }}</td>
+                                    <td class="text-truncate" style="max-width: 200px;">{{ $ewalet->deskripsi }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -355,135 +288,121 @@
     </div>
 </div>
 
-
 @endsection
 
-
+@section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Monthly Order Count Bar Chart
-    var monthlyOrderCtx = document.getElementById("monthlyOrderChart").getContext("2d");
+    // Monthly Order Count Bar Chart - Modern Style
+    const monthlyOrderCtx = document.getElementById("monthlyOrderChart").getContext("2d");
     new Chart(monthlyOrderCtx, {
         type: "bar",
         data: {
             labels: @json($monthlyLabels),
             datasets: [{
                 label: "Orders",
-                tension: 0.4,
-                borderWidth: 0,
-                borderRadius: 4,
-                borderSkipped: false,
-                backgroundColor: "rgba(255, 255, 255, .8)",
+                backgroundColor: "rgba(13, 110, 253, 0.7)",
+                borderColor: "rgba(13, 110, 253, 1)",
+                borderWidth: 1,
+                borderRadius: 6,
                 data: @json($monthlyCounts),
-                maxBarThickness: 6
             }],
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    display: false,
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: "#2c3e50",
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 12 },
+                    padding: 12,
+                    cornerRadius: 6,
+                    displayColors: false
                 }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
             },
             scales: {
                 y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        suggestedMin: 0,
-                        suggestedMax: Math.max(...@json($monthlyCounts)) * 1.2,
-                        beginAtZero: true,
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                        color: "#fff"
-                    },
+                    beginAtZero: true,
+                    grid: { color: "rgba(0, 0, 0, 0.05)" },
+                    ticks: { color: "#6c757d" }
                 },
                 x: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5],
-                        color: 'rgba(255, 255, 255, .2)'
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#f8f9fa',
-                        padding: 10,
-                        font: {
-                            size: 14,
-                            weight: 300,
-                            family: "Roboto",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
+                    grid: { display: false },
+                    ticks: { color: "#6c757d" }
+                }
+            }
         }
     });
 
-    // Order Status Pie Chart
-    var statusPieCtx = document.getElementById("statusPieChart").getContext("2d");
+    // Order Status Pie Chart - Modern Style
+    const statusPieCtx = document.getElementById("statusPieChart").getContext("2d");
     new Chart(statusPieCtx, {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: @json($statusCounts->pluck('status')),
             datasets: [{
                 data: @json($statusCounts->pluck('count')),
                 backgroundColor: [
-                    'rgba(255, 255, 255, 0.7)',
-                    'rgba(255, 255, 255, 0.6)',
-                    'rgba(255, 255, 255, 0.5)',
-                    'rgba(255, 255, 255, 0.4)',
-                    'rgba(255, 255, 255, 0.3)'
+                    'rgba(40, 167, 69, 0.7)',
+                    'rgba(13, 110, 253, 0.7)',
+                    'rgba(255, 193, 7, 0.7)',
+                    'rgba(220, 53, 69, 0.7)',
+                    'rgba(108, 117, 125, 0.7)'
                 ],
-                borderColor: [
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)'
-                ],
-                borderWidth: 1
+                borderColor: '#fff',
+                borderWidth: 2
             }],
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            cutout: '70%',
             plugins: {
                 legend: {
                     position: 'right',
                     labels: {
-                        color: '#fff',
-                        font: {
-                            size: 12,
-                            family: "Roboto"
-                        }
+                        color: '#495057',
+                        font: { size: 12 },
+                        padding: 20,
+                        usePointStyle: true,
+                        pointStyle: 'circle'
                     }
+                },
+                tooltip: {
+                    backgroundColor: "#2c3e50",
+                    titleFont: { size: 14, weight: 'bold' },
+                    bodyFont: { size: 12 },
+                    padding: 12,
+                    cornerRadius: 6
                 }
-            },
-            cutout: '60%'
+            }
         }
     });
 });
 </script>
+
+<style>
+    .card-hover:hover {
+        transform: translateY(-5px);
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    
+    .star-rating {
+        color: #ffc107;
+        font-size: 0.9rem;
+    }
+    
+    .chart-container {
+        position: relative;
+        min-height: 250px;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+</style>
+@endsection
